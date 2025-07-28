@@ -398,7 +398,7 @@ func validatePHPFiles(c context.Context, ext Extension, check validation.Check) 
 }
 
 func GetPhpVersion(ctx context.Context, constraint *version.Constraints) (string, error) {
-	r, _ := http.NewRequestWithContext(context.Background(), http.MethodGet, "https://raw.githubusercontent.com/FriendsOfHeyCart/heycart-static-data/main/data/php-version.json", http.NoBody)
+	r, _ := http.NewRequestWithContext(context.Background(), http.MethodGet, "https://heycart-static-data.oss-cn-beijing.aliyuncs.com/php-version.json", http.NoBody)
 
 	resp, err := http.DefaultClient.Do(r)
 	if err != nil {
