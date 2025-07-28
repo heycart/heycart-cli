@@ -5,7 +5,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Development Commands
 
 ### Building and Running
-- **Build the CLI**: `go build -o shopware-cli .`
+- **Build the CLI**: `go build -o heycart-cli .`
 - **Run directly**: `go run main.go [command]`
 - **Run tests**: `go test ./...`
 - **Run specific test**: `go test ./[package_path]`
@@ -44,7 +44,7 @@ The CLI supports three extension types:
 Extension detection is automatic based on file presence. Each type has specific build, validation, and packaging rules.
 
 ### Configuration Files
-- **`.shopware-cli.yaml`** - Global CLI configuration
+- **`.heycart-cli.yaml`** - Global CLI configuration
 - **`.shopware-extension.yml`** - Extension-specific settings (schema: `extension/shopware-extension-schema.json`)
 - **`.shopware-project.yml`** - Project-specific settings (schema: `shop/shopware-project-schema.json`)
 
@@ -83,30 +83,30 @@ LLM providers are configurable (OpenAI, Gemini, OpenRouter) with API key managem
 ### Building Extensions
 ```bash
 # Build extension (auto-detects type)
-shopware-cli extension build
+heycart-cli extension build
 
 # Watch mode for development
-shopware-cli extension admin-watch
+heycart-cli extension admin-watch
 
 # Validate extension
-shopware-cli extension validate
+heycart-cli extension validate
 
 # Create distribution package
-shopware-cli extension zip
+heycart-cli extension zip
 ```
 
 ### Project Management
 ```bash
 # Create new project
-shopware-cli project create
+heycart-cli project create
 
 # Build assets
-shopware-cli project admin-build
-shopware-cli project storefront-build
+heycart-cli project admin-build
+heycart-cli project storefront-build
 
 # Development servers
-shopware-cli project admin-watch
-shopware-cli project storefront-watch
+heycart-cli project admin-watch
+heycart-cli project storefront-watch
 ```
 
 ## Code Quality Integration

@@ -27,7 +27,7 @@ var extensionValidateCmd = &cobra.Command{
 		tmpDir, err := os.MkdirTemp(os.TempDir(), "analyse-extension-*")
 		only, _ := cmd.Flags().GetString("only")
 
-		// If the user does not want to run full validation, only run shopware-cli
+		// If the user does not want to run full validation, only run heycart-cli
 		if !isFull {
 			only = "sw-cli"
 		}

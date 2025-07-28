@@ -21,7 +21,7 @@ var (
 )
 
 var rootCmd = &cobra.Command{
-	Use:     "shopware-cli",
+	Use:     "heycart-cli",
 	Short:   "A cli for common Shopware tasks",
 	Long:    `This application contains some utilities like extension management`,
 	Version: version,
@@ -29,7 +29,7 @@ var rootCmd = &cobra.Command{
 
 func Execute(ctx context.Context) {
 	ctx = logging.WithLogger(ctx, logging.NewLogger(slices.Contains(os.Args, "--verbose")))
-	accountApi.SetUserAgent("shopware-cli/" + version)
+	accountApi.SetUserAgent("heycart-cli/" + version)
 
 	if err := rootCmd.ExecuteContext(ctx); err != nil {
 		logging.FromContext(ctx).Fatalln(err)
@@ -43,7 +43,7 @@ func init() {
 		_ = config.InitConfig(cfgFile)
 	})
 
-	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.shopware-cli.yaml)")
+	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.heycart-cli.yaml)")
 	rootCmd.PersistentFlags().Bool("verbose", false, "show debug output")
 
 	project.Register(rootCmd)

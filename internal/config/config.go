@@ -77,7 +77,7 @@ func InitConfig(configPath string) error {
 			return err
 		}
 
-		state.cfgPath = fmt.Sprintf("%s/.shopware-cli.yml", configDir)
+		state.cfgPath = fmt.Sprintf("%s/.heycart-cli.yml", configDir)
 	}
 
 	err := env.Parse(state.inner)

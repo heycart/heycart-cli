@@ -302,7 +302,7 @@ func ReadConfig(fileName string, allowFallback bool) (*Config, error) {
 			return fillEmptyConfig(config), nil
 		}
 
-		return nil, fmt.Errorf("cannot find project configuration file \"%s\", use shopware-cli project config init to create one", fileName)
+		return nil, fmt.Errorf("cannot find project configuration file \"%s\", use heycart-cli project config init to create one", fileName)
 	}
 
 	if err != nil {

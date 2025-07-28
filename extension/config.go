@@ -51,7 +51,7 @@ type ConfigBuildZipComposer struct {
 }
 
 type ConfigBuildZipAssets struct {
-	// When enabled, the shopware-cli build the assets
+	// When enabled, the heycart-cli build the assets
 	Enabled bool `yaml:"enabled"`
 	// Commands to run before the assets build
 	BeforeHooks []string `yaml:"before_hooks,omitempty"`

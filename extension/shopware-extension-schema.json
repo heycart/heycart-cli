@@ -97,7 +97,7 @@
       "properties": {
         "enabled": {
           "type": "boolean",
-          "description": "When enabled, the shopware-cli build the assets"
+          "description": "When enabled, the heycart-cli build the assets"
         },
         "before_hooks": {
           "items": {

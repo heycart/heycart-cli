@@ -37,7 +37,7 @@ var (
 	assetPathRegExp         = regexp.MustCompile(`(?m)assetPath:\s.*`)
 
 	extensionAssetRegExp   = regexp.MustCompile(`(?m)/bundles/([a-z0-9-]+)/static/(.*)$`)
-	extensionEsbuildRegExp = regexp.MustCompile(`(?m)/.shopware-cli/([a-z0-9-]+)/(.*)$`)
+	extensionEsbuildRegExp = regexp.MustCompile(`(?m)/.heycart-cli/([a-z0-9-]+)/(.*)$`)
 )
 
 //go:embed static/live-reload.js
@@ -310,8 +310,8 @@ var extensionAdminWatchCmd = &cobra.Command{
 
 				for _, ext := range esbuildInstances {
 					bundleInfo.Bundles[ext.name] = adminBundlesInfoAsset{
-						Css:        []string{fmt.Sprintf("%s/.shopware-cli/%s/extension.css", browserUrl.String(), ext.assetName)},
-						Js:         []string{fmt.Sprintf("%s/.shopware-cli/%s/extension.js", browserUrl.String(), ext.assetName)},
+						Css:        []string{fmt.Sprintf("%s/.heycart-cli/%s/extension.css", browserUrl.String(), ext.assetName)},
+						Js:         []string{fmt.Sprintf("%s/.heycart-cli/%s/extension.js", browserUrl.String(), ext.assetName)},
 						LiveReload: true,
 						Name:       ext.assetName,
 					}

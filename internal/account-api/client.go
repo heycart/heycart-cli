@@ -13,7 +13,7 @@ import (
 	"github.com/heycart/heycart-cli/logging"
 )
 
-var httpUserAgent = "shopware-cli/0.0.0"
+var httpUserAgent = "heycart-cli/0.0.0"
 
 func SetUserAgent(userAgent string) {
 	httpUserAgent = userAgent
@@ -103,7 +103,7 @@ func getApiTokenCacheFilePath() (string, error) {
 		return "", err
 	}
 
-	shopwareCacheDir := filepath.Join(cacheDir, "shopware-cli")
+	shopwareCacheDir := filepath.Join(cacheDir, "heycart-cli")
 	return filepath.Join(shopwareCacheDir, CacheFileName), nil
 }
 

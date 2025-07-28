@@ -131,12 +131,12 @@ func (MailTemplateSync) Pull(ctx adminSdk.ApiContext, client *adminSdk.Client, c
 
 			configKey := translation.Language.Name
 
-			htmLFilePath := fmt.Sprintf(".shopware-cli/mail-template/%s/%s-html.twig", row.MailTemplateType.TechnicalName, configKey)
-			plainFilePath := fmt.Sprintf(".shopware-cli/mail-template/%s/%s-plain.twig", row.MailTemplateType.TechnicalName, configKey)
+			htmLFilePath := fmt.Sprintf(".heycart-cli/mail-template/%s/%s-html.twig", row.MailTemplateType.TechnicalName, configKey)
+			plainFilePath := fmt.Sprintf(".heycart-cli/mail-template/%s/%s-plain.twig", row.MailTemplateType.TechnicalName, configKey)
 
 			if ok := duplicateTypes[row.MailTemplateType.TechnicalName]; ok {
-				htmLFilePath = fmt.Sprintf(".shopware-cli/mail-template/%s/%s-%s-html.twig", row.MailTemplateType.TechnicalName, configKey, row.Id)
-				plainFilePath = fmt.Sprintf(".shopware-cli/mail-template/%s/%s-%s-plain.twig", row.MailTemplateType.TechnicalName, configKey, row.Id)
+				htmLFilePath = fmt.Sprintf(".heycart-cli/mail-template/%s/%s-%s-html.twig", row.MailTemplateType.TechnicalName, configKey, row.Id)
+				plainFilePath = fmt.Sprintf(".heycart-cli/mail-template/%s/%s-%s-plain.twig", row.MailTemplateType.TechnicalName, configKey, row.Id)
 			}
 
 			dir := filepath.Dir(htmLFilePath)

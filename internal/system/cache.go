@@ -8,5 +8,5 @@ import (
 func GetShopwareCliCacheDir() string {
 	cacheDir, _ := os.UserCacheDir()
 
-	return path.Join(cacheDir, "shopware-cli")
+	return path.Join(cacheDir, "heycart-cli")
 }

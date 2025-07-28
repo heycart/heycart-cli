@@ -52,7 +52,7 @@ var projectCreateCmd = &cobra.Command{
 			return fmt.Errorf("the folder %s exists already", projectFolder)
 		}
 
-		logging.FromContext(cmd.Context()).Infof("Using Symfony Flex to create a new Shopware 6 project")
+		logging.FromContext(cmd.Context()).Infof("Using Symfony Flex to create a new HeyCart 6 project")
 
 		filteredVersions, err := getFilteredInstallVersions(cmd.Context())
 		if err != nil {
@@ -355,7 +355,7 @@ func getLatestFallbackVersion(ctx context.Context, branch string) (string, error
 		return "", err
 	}
 
-	r.Header.Set("User-Agent", "shopware-cli")
+	r.Header.Set("User-Agent", "heycart-cli")
 
 	resp, err := http.DefaultClient.Do(r)
 	if err != nil {

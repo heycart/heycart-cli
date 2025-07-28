@@ -1,8 +1,8 @@
 ARG PHP_VERSION
 
-FROM ghcr.io/shopware/shopware-cli-base:${PHP_VERSION}
+FROM ghcr.io/shopware/heycart-cli-base:${PHP_VERSION}
 
-COPY shopware-cli /usr/local/bin/
+COPY heycart-cli /usr/local/bin/
 
-ENTRYPOINT ["/usr/local/bin/shopware-cli"]
+ENTRYPOINT ["/usr/local/bin/heycart-cli"]
 CMD ["--help"]

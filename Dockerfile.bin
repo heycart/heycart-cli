@@ -1,4 +1,4 @@
 FROM scratch
-COPY shopware-cli /
-ENTRYPOINT ["/shopware-cli"]
+COPY heycart-cli /
+ENTRYPOINT ["/heycart-cli"]
 CMD ["--help"]

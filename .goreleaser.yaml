@@ -9,7 +9,7 @@ before:
 builds:
   - env:
       - CGO_ENABLED=0
-    binary: shopware-cli
+    binary: heycart-cli
     ldflags: -s -w -X 'github.com/heycart/heycart-cli/cmd.version={{ .Version }}'
     flags:
       - -trimpath
@@ -34,7 +34,7 @@ archives:
 release:
   github:
     owner: shopware
-    name: shopware-cli
+    name: heycart-cli
 
 dockers:
   # AMD64
@@ -42,7 +42,7 @@ dockers:
     goos: linux
     goarch: amd64
     image_templates:
-      - "shopware/shopware-cli:{{ .Tag }}-php-8.4-amd64"
+      - "shopware/heycart-cli:{{ .Tag }}-php-8.4-amd64"
     build_flag_templates:
       - "--build-arg=PHP_VERSION=8.4"
       - "--platform=linux/amd64"
@@ -50,7 +50,7 @@ dockers:
     goos: linux
     goarch: amd64
     image_templates:
-      - "shopware/shopware-cli:{{ .Tag }}-php-8.3-amd64"
+      - "shopware/heycart-cli:{{ .Tag }}-php-8.3-amd64"
     build_flag_templates:
       - "--build-arg=PHP_VERSION=8.3"
       - "--platform=linux/amd64"
@@ -58,7 +58,7 @@ dockers:
     goos: linux
     goarch: amd64
     image_templates:
-      - "shopware/shopware-cli:{{ .Tag }}-php-8.2-amd64"
+      - "shopware/heycart-cli:{{ .Tag }}-php-8.2-amd64"
     build_flag_templates:
       - "--build-arg=PHP_VERSION=8.2"
       - "--platform=linux/amd64"
@@ -66,7 +66,7 @@ dockers:
     goos: linux
     goarch: amd64
     image_templates:
-      - "shopware/shopware-cli:{{ .Tag }}-php-8.1-amd64"
+      - "shopware/heycart-cli:{{ .Tag }}-php-8.1-amd64"
     build_flag_templates:
       - "--build-arg=PHP_VERSION=8.1"
       - "--platform=linux/amd64"
@@ -76,7 +76,7 @@ dockers:
     goos: linux
     goarch: arm64
     image_templates:
-      - "shopware/shopware-cli:{{ .Tag }}-php-8.4-arm64"
+      - "shopware/heycart-cli:{{ .Tag }}-php-8.4-arm64"
     build_flag_templates:
       - "--build-arg=PHP_VERSION=8.4"
       - "--platform=linux/arm64"
@@ -84,7 +84,7 @@ dockers:
     goos: linux
     goarch: arm64
     image_templates:
-      - "shopware/shopware-cli:{{ .Tag }}-php-8.3-arm64"
+      - "shopware/heycart-cli:{{ .Tag }}-php-8.3-arm64"
     build_flag_templates:
       - "--build-arg=PHP_VERSION=8.3"
       - "--platform=linux/arm64"
@@ -92,7 +92,7 @@ dockers:
     goos: linux
     goarch: arm64
     image_templates:
-      - "shopware/shopware-cli:{{ .Tag }}-php-8.2-arm64"
+      - "shopware/heycart-cli:{{ .Tag }}-php-8.2-arm64"
     build_flag_templates:
       - "--build-arg=PHP_VERSION=8.2"
       - "--platform=linux/arm64"
@@ -100,7 +100,7 @@ dockers:
     goos: linux
     goarch: arm64
     image_templates:
-      - "shopware/shopware-cli:{{ .Tag }}-php-8.1-arm64"
+      - "shopware/heycart-cli:{{ .Tag }}-php-8.1-arm64"
     build_flag_templates:
       - "--build-arg=PHP_VERSION=8.1"
       - "--platform=linux/arm64"
@@ -110,7 +110,7 @@ dockers:
     goarch: amd64
     dockerfile: Dockerfile.bin
     image_templates:
-      - "shopware/shopware-cli:bin-{{ .Tag }}-amd64"
+      - "shopware/heycart-cli:bin-{{ .Tag }}-amd64"
     build_flag_templates:
       - "--platform=linux/amd64"
 
@@ -119,71 +119,71 @@ dockers:
     goarch: arm64
     dockerfile: Dockerfile.bin
     image_templates:
-      - "shopware/shopware-cli:bin-{{ .Tag }}-arm64"
+      - "shopware/heycart-cli:bin-{{ .Tag }}-arm64"
     build_flag_templates:
       - "--platform=linux/arm64"
 
 docker_manifests:
   # Shopware Docker Hub
-  - name_template: shopware/shopware-cli:latest
+  - name_template: shopware/heycart-cli:latest
     image_templates:
-      - "shopware/shopware-cli:{{ .Tag }}-php-8.3-amd64"
-      - "shopware/shopware-cli:{{ .Tag }}-php-8.3-arm64"
+      - "shopware/heycart-cli:{{ .Tag }}-php-8.3-amd64"
+      - "shopware/heycart-cli:{{ .Tag }}-php-8.3-arm64"
 
-  - name_template: shopware/shopware-cli:latest-php-8.4
+  - name_template: shopware/heycart-cli:latest-php-8.4
     image_templates:
-      - "shopware/shopware-cli:{{ .Tag }}-php-8.4-amd64"
-      - "shopware/shopware-cli:{{ .Tag }}-php-8.4-arm64"
+      - "shopware/heycart-cli:{{ .Tag }}-php-8.4-amd64"
+      - "shopware/heycart-cli:{{ .Tag }}-php-8.4-arm64"
 
-  - name_template: shopware/shopware-cli:latest-php-8.3
+  - name_template: shopware/heycart-cli:latest-php-8.3
     image_templates:
-      - "shopware/shopware-cli:{{ .Tag }}-php-8.3-amd64"
-      - "shopware/shopware-cli:{{ .Tag }}-php-8.3-arm64"
+      - "shopware/heycart-cli:{{ .Tag }}-php-8.3-amd64"
+      - "shopware/heycart-cli:{{ .Tag }}-php-8.3-arm64"
 
-  - name_template: shopware/shopware-cli:latest-php-8.2
+  - name_template: shopware/heycart-cli:latest-php-8.2
     image_templates:
-      - "shopware/shopware-cli:{{ .Tag }}-php-8.2-amd64"
-      - "shopware/shopware-cli:{{ .Tag }}-php-8.2-arm64"
+      - "shopware/heycart-cli:{{ .Tag }}-php-8.2-amd64"
+      - "shopware/heycart-cli:{{ .Tag }}-php-8.2-arm64"
 
-  - name_template: shopware/shopware-cli:latest-php-8.1
+  - name_template: shopware/heycart-cli:latest-php-8.1
     image_templates:
-      - "shopware/shopware-cli:{{ .Tag }}-php-8.1-amd64"
-      - "shopware/shopware-cli:{{ .Tag }}-php-8.1-arm64"
+      - "shopware/heycart-cli:{{ .Tag }}-php-8.1-amd64"
+      - "shopware/heycart-cli:{{ .Tag }}-php-8.1-arm64"
 
-  - name_template: shopware/shopware-cli:{{ .Tag }}
+  - name_template: shopware/heycart-cli:{{ .Tag }}
     image_templates:
-      - "shopware/shopware-cli:{{ .Tag }}-php-8.3-amd64"
-      - "shopware/shopware-cli:{{ .Tag }}-php-8.3-arm64"
+      - "shopware/heycart-cli:{{ .Tag }}-php-8.3-amd64"
+      - "shopware/heycart-cli:{{ .Tag }}-php-8.3-arm64"
 
-  - name_template: shopware/shopware-cli:{{ .Tag }}-php-8.4
+  - name_template: shopware/heycart-cli:{{ .Tag }}-php-8.4
     image_templates:
-      - "shopware/shopware-cli:{{ .Tag }}-php-8.4-amd64"
-      - "shopware/shopware-cli:{{ .Tag }}-php-8.4-arm64"
+      - "shopware/heycart-cli:{{ .Tag }}-php-8.4-amd64"
+      - "shopware/heycart-cli:{{ .Tag }}-php-8.4-arm64"
   
-  - name_template: shopware/shopware-cli:{{ .Tag }}-php-8.3
+  - name_template: shopware/heycart-cli:{{ .Tag }}-php-8.3
     image_templates:
-      - "shopware/shopware-cli:{{ .Tag }}-php-8.3-amd64"
-      - "shopware/shopware-cli:{{ .Tag }}-php-8.3-arm64"
+      - "shopware/heycart-cli:{{ .Tag }}-php-8.3-amd64"
+      - "shopware/heycart-cli:{{ .Tag }}-php-8.3-arm64"
 
-  - name_template: shopware/shopware-cli:{{ .Tag }}-php-8.2
+  - name_template: shopware/heycart-cli:{{ .Tag }}-php-8.2
     image_templates:
-      - "shopware/shopware-cli:{{ .Tag }}-php-8.2-amd64"
-      - "shopware/shopware-cli:{{ .Tag }}-php-8.2-arm64"
+      - "shopware/heycart-cli:{{ .Tag }}-php-8.2-amd64"
+      - "shopware/heycart-cli:{{ .Tag }}-php-8.2-arm64"
 
-  - name_template: shopware/shopware-cli:{{ .Tag }}-php-8.1
+  - name_template: shopware/heycart-cli:{{ .Tag }}-php-8.1
     image_templates:
-      - "shopware/shopware-cli:{{ .Tag }}-php-8.1-amd64"
-      - "shopware/shopware-cli:{{ .Tag }}-php-8.1-arm64"
+      - "shopware/heycart-cli:{{ .Tag }}-php-8.1-amd64"
+      - "shopware/heycart-cli:{{ .Tag }}-php-8.1-arm64"
 
-  - name_template: shopware/shopware-cli:bin-{{ .Tag }}
+  - name_template: shopware/heycart-cli:bin-{{ .Tag }}
     image_templates:
-      - "shopware/shopware-cli:bin-{{ .Tag }}-amd64"
-      - "shopware/shopware-cli:bin-{{ .Tag }}-arm64"
+      - "shopware/heycart-cli:bin-{{ .Tag }}-amd64"
+      - "shopware/heycart-cli:bin-{{ .Tag }}-arm64"
 
-  - name_template: shopware/shopware-cli:bin
+  - name_template: shopware/heycart-cli:bin
     image_templates:
-      - "shopware/shopware-cli:bin-{{ .Tag }}-amd64"
-      - "shopware/shopware-cli:bin-{{ .Tag }}-arm64"
+      - "shopware/heycart-cli:bin-{{ .Tag }}-amd64"
+      - "shopware/heycart-cli:bin-{{ .Tag }}-arm64"
 
 sboms:
   - artifacts: archive
@@ -244,25 +244,25 @@ aurs:
     commit_author:
       name: "Shopware Bot"
       email: github@shopware.com
-    git_url: 'ssh://aur@aur.archlinux.org/shopware-cli-bin.git'
+    git_url: 'ssh://aur@aur.archlinux.org/heycart-cli-bin.git'
     depends:
       - "git"
     package: |-
-      install -Dm755 "./shopware-cli" "${pkgdir}/usr/bin/shopware-cli"
+      install -Dm755 "./heycart-cli" "${pkgdir}/usr/bin/heycart-cli"
 
       # license
-      install -Dm644 "./LICENSE" "${pkgdir}/usr/share/licenses/shopware-cli/LICENSE"
+      install -Dm644 "./LICENSE" "${pkgdir}/usr/share/licenses/heycart-cli/LICENSE"
 
       # completions
       mkdir -p "${pkgdir}/usr/share/bash-completion/completions/"
       mkdir -p "${pkgdir}/usr/share/zsh/site-functions/"
       mkdir -p "${pkgdir}/usr/share/fish/vendor_completions.d/"
-      install -Dm644 "./completions/shopware-cli.bash" "${pkgdir}/usr/share/bash-completion/completions/shopware-cli"
-      install -Dm644 "./completions/shopware-cli.zsh" "${pkgdir}/usr/share/zsh/site-functions/_shopware-cli"
-      install -Dm644 "./completions/shopware-cli.fish" "${pkgdir}/usr/share/fish/vendor_completions.d/shopware-cli.fish"
+      install -Dm644 "./completions/heycart-cli.bash" "${pkgdir}/usr/share/bash-completion/completions/heycart-cli"
+      install -Dm644 "./completions/heycart-cli.zsh" "${pkgdir}/usr/share/zsh/site-functions/_heycart-cli"
+      install -Dm644 "./completions/heycart-cli.fish" "${pkgdir}/usr/share/fish/vendor_completions.d/heycart-cli.fish"
 
 nix:
-  - name: shopware-cli
+  - name: heycart-cli
     repository:
       owner: FriendsOfShopware
       name: nur-packages
@@ -272,29 +272,29 @@ nix:
       name: "Shopware Bot"
       email: github@shopware.com
     post_install: |
-      installShellCompletion --cmd shopware-cli \
-      --bash <($out/bin/shopware-cli completion bash) \
-      --zsh <($out/bin/shopware-cli completion zsh) \
-      --fish <($out/bin/shopware-cli completion fish)
+      installShellCompletion --cmd heycart-cli \
+      --bash <($out/bin/heycart-cli completion bash) \
+      --zsh <($out/bin/heycart-cli completion zsh) \
+      --fish <($out/bin/heycart-cli completion fish)
     homepage: "https://sw-cli.fos.gg"
     description: "Command line tool for Shopware 6"
     license: "mit"
 
 nfpms:
   -
-    package_name: shopware-cli
+    package_name: heycart-cli
     vendor: "shopware AG"
     homepage: https://github.com/heycart/heycart-cli/
     maintainer: Soner Sayakci <s.sayakci@shopware.com>
     description: A cli which contains handy helpful commands for daily Shopware tasks
     license: MIT
     contents:
-      - src: ./completions/shopware-cli.bash
-        dst: /etc/bash_completion.d/shopware-cli
-      - src: ./completions/shopware-cli.fish
-        dst: /usr/share/fish/completions/shopware-cli.fish
-      - src: ./completions/shopware-cli.zsh
-        dst: /usr/local/share/zsh/site-functions/_shopware-cli
+      - src: ./completions/heycart-cli.bash
+        dst: /etc/bash_completion.d/heycart-cli
+      - src: ./completions/heycart-cli.fish
+        dst: /usr/share/fish/completions/heycart-cli.fish
+      - src: ./completions/heycart-cli.zsh
+        dst: /usr/local/share/zsh/site-functions/_heycart-cli
     formats:
       - apk
       - deb
@@ -314,7 +314,7 @@ brews:
     license: MIT
     directory: Formula
     test: |
-      system "#{bin}/shopware-cli --version"
+      system "#{bin}/heycart-cli --version"
     dependencies:
     - name: node-sass
     - name: git
@@ -322,10 +322,10 @@ brews:
     - name: node
       type: optional
     install: |-
-      bin.install "shopware-cli"
-      bash_completion.install "completions/shopware-cli.bash" => "_shopware-cli"
-      zsh_completion.install "completions/shopware-cli.zsh" => "_shopware-cli"
-      fish_completion.install "completions/shopware-cli.fish"
+      bin.install "heycart-cli"
+      bash_completion.install "completions/heycart-cli.bash" => "_heycart-cli"
+      zsh_completion.install "completions/heycart-cli.zsh" => "_heycart-cli"
+      fish_completion.install "completions/heycart-cli.fish"
   - repository:
       owner: shopware
       name: homebrew-tap
@@ -339,7 +339,7 @@ brews:
     license: MIT
     directory: Formula
     test: |
-      system "#{bin}/shopware-cli --version"
+      system "#{bin}/heycart-cli --version"
     dependencies:
     - name: node-sass
     - name: git
@@ -347,13 +347,13 @@ brews:
     - name: node
       type: optional
     install: |-
-      bin.install "shopware-cli"
-      bash_completion.install "completions/shopware-cli.bash" => "_shopware-cli"
-      zsh_completion.install "completions/shopware-cli.zsh" => "_shopware-cli"
-      fish_completion.install "completions/shopware-cli.fish"
+      bin.install "heycart-cli"
+      bash_completion.install "completions/heycart-cli.bash" => "_heycart-cli"
+      zsh_completion.install "completions/heycart-cli.zsh" => "_heycart-cli"
+      fish_completion.install "completions/heycart-cli.fish"
 
 npms:
-  - name: "@shopware-ag/shopware-cli"
+  - name: "@shopware-ag/heycart-cli"
     description: "Shopware CLI helps Shopware developers manage extensions"
     license: MIT
     homepage: https://developer.shopware.com/docs/products/cli/

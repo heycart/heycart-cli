@@ -1,10 +1,10 @@
 /.idea
 /.fleet
-/shopware-cli*
+/heycart-cli*
 dist/
 /completions
 /local
-/.shopware-cli
+/.heycart-cli
 /.shopware-project.yml
 /.shopware-project.yaml
 /test-app

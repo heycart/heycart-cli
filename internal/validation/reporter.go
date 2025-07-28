@@ -286,7 +286,7 @@ func doJUnitReport(result Check) error {
 	}
 
 	suite := JUnitTestSuite{
-		Name:     "shopware-cli-validation",
+		Name:     "heycart-cli-validation",
 		Tests:    len(testCases),
 		Failures: failures,
 		Errors:   errors,
