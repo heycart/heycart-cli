@@ -48,7 +48,42 @@ release:
   github:
     owner: heycart
     name: heycart-cli
-
+    
+dockers:
+  # AMD64
+  - use: buildx
+    goos: linux
+    goarch: amd64
+    image_templates:
+      - "heycart/heycart-cli:{{ .Tag }}-php-8.4-amd64"
+    build_flag_templates:
+      - "--build-arg=PHP_VERSION=8.4"
+      - "--platform=linux/amd64"
+  - use: buildx
+    goos: linux
+    goarch: amd64
+    image_templates:
+      - "heycart/heycart-cli:{{ .Tag }}-php-8.3-amd64"
+    build_flag_templates:
+      - "--build-arg=PHP_VERSION=8.3"
+      - "--platform=linux/amd64"
+  - use: buildx
+    goos: linux
+    goarch: amd64
+    image_templates:
+      - "heycart/heycart-cli:{{ .Tag }}-php-8.2-amd64"
+    build_flag_templates:
+      - "--build-arg=PHP_VERSION=8.2"
+      - "--platform=linux/amd64"
+  - use: buildx
+    goos: linux
+    goarch: amd64
+    image_templates:
+      - "heycart/heycart-cli:{{ .Tag }}-php-8.1-amd64"
+    build_flag_templates:
+      - "--build-arg=PHP_VERSION=8.1"
+      - "--platform=linux/amd64"
+      - 
 checksum:
   name_template: 'checksums.txt'
 
