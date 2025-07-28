@@ -1,0 +1,25 @@
+/.idea
+/.fleet
+/shopware-cli*
+dist/
+/completions
+/local
+/.shopware-cli
+/.shopware-project.yml
+/.shopware-project.yaml
+/test-app
+/go-shopware-admin-api-sdk
+/*.zip
+/Frosh*
+/Swag*
+/result
+/project
+dump.sql*
+
+/testdata
+
+# Devenv
+.devenv*
+devenv.local.nix
+
+/.direnv
