@@ -49,7 +49,7 @@ jobs:
         run: ./heycart-cli extension zip plugin --disable-git --release
 
       - name: Validate Plugin
-        run: ./heycart-cli extension validate FroshTools.zip
+        run: ./heycart-cli extension validate HeyPlatformDemoData.zip
 
       - name: Get Changelog
         run: ./heycart-cli extension get-changelog FroshTools.zip
