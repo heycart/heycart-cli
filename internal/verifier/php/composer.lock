@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d8a4eac97b30d8054cc1b3b1664e6d94",
+    "content-hash": "e98c3eaaae180f3481311b159bcb374f",
     "packages": [
         {
             "name": "clue/ndjson-react",
@@ -405,17 +405,67 @@
             "time": "2024-08-06T10:04:20+00:00"
         },
         {
-            "name": "friendsofphp/php-cs-fixer",
-            "version": "v3.82.2",
+            "name": "friendsofheycart/heycart-rector",
+            "version": "0.5.6",
             "source": {
                 "type": "git",
-                "url": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer.git",
-                "reference": "684ed3ab41008a2a4848de8bde17eb168c596247"
+                "url": "https://github.com/FriendsOfHeyCart/heycart-rector.git",
+                "reference": "4ce26c0584ed74c7ffdae7d5b029ea2b0860b743"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHP-CS-Fixer/PHP-CS-Fixer/zipball/684ed3ab41008a2a4848de8bde17eb168c596247",
-                "reference": "684ed3ab41008a2a4848de8bde17eb168c596247",
+                "url": "https://api.github.com/repos/FriendsOfHeyCart/heycart-rector/zipball/4ce26c0584ed74c7ffdae7d5b029ea2b0860b743",
+                "reference": "4ce26c0584ed74c7ffdae7d5b029ea2b0860b743",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.1",
+                "rector/rector": "~2.0"
+            },
+            "conflict": {
+                "rector/rector": "<2.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.57",
+                "phpunit/phpunit": "^9.5",
+                "symplify/easy-coding-standard": "~11.2"
+            },
+            "type": "rector-extension",
+            "extra": {
+                "rector": {
+                    "includes": [
+                        "config/config.php"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "FriendsOfHeyCart\\Rector\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "mit"
+            ],
+            "description": "HeyCart specific Rector",
+            "support": {
+                "issues": "https://github.com/FriendsOfHeyCart/heycart-rector/issues",
+                "source": "https://github.com/FriendsOfHeyCart/heycart-rector/tree/0.5.6"
+            },
+            "time": "2025-07-28T13:40:16+00:00"
+        },
+        {
+            "name": "friendsofphp/php-cs-fixer",
+            "version": "v3.84.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer.git",
+                "reference": "38dad0767bf2a9b516b976852200ae722fe984ca"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/PHP-CS-Fixer/PHP-CS-Fixer/zipball/38dad0767bf2a9b516b976852200ae722fe984ca",
+                "reference": "38dad0767bf2a9b516b976852200ae722fe984ca",
                 "shasum": ""
             },
             "require": {
@@ -499,7 +549,7 @@
             ],
             "support": {
                 "issues": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/issues",
-                "source": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/tree/v3.82.2"
+                "source": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/tree/v3.84.0"
             },
             "funding": [
                 {
@@ -507,57 +557,56 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-07-08T21:13:15+00:00"
+            "time": "2025-07-15T18:21:57+00:00"
         },
         {
-            "name": "frosh/heycart-rector",
-            "version": "0.5.6",
+            "name": "heycartlabs/phpstan-heycart",
+            "version": "0.1.11",
             "source": {
                 "type": "git",
-                "url": "https://github.com/FriendsOfHeyCart/heycart-rector.git",
-                "reference": "4f25cb8edb00816ea05d05ee3e8ee12b0213406d"
+                "url": "https://github.com/heycartLabs/phpstan-heycart.git",
+                "reference": "3e0a1a2e8e02baa6e2b34d09c20df5d39615f4e6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfHeyCart/heycart-rector/zipball/4f25cb8edb00816ea05d05ee3e8ee12b0213406d",
-                "reference": "4f25cb8edb00816ea05d05ee3e8ee12b0213406d",
+                "url": "https://api.github.com/repos/heycartLabs/phpstan-heycart/zipball/3e0a1a2e8e02baa6e2b34d09c20df5d39615f4e6",
+                "reference": "3e0a1a2e8e02baa6e2b34d09c20df5d39615f4e6",
                 "shasum": ""
             },
             "require": {
-                "php": "^8.1",
-                "rector/rector": "~2.0"
-            },
-            "conflict": {
-                "rector/rector": "<2.0"
+                "php": "^8.2",
+                "phpstan/phpstan": "^2",
+                "symfony/polyfill-php84": "*"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^3.57",
-                "phpunit/phpunit": "^9.5",
-                "symplify/easy-coding-standard": "~11.2"
+                "friendsofphp/php-cs-fixer": "v3.64.0",
+                "heycart/core": "^6.6",
+                "phpstan/extension-installer": "*",
+                "phpunit/phpunit": "~11.3.6"
             },
-            "type": "rector-extension",
+            "type": "library",
             "extra": {
-                "rector": {
+                "phpstan": {
                     "includes": [
-                        "config/config.php"
+                        "rules.neon"
                     ]
                 }
             },
             "autoload": {
                 "psr-4": {
-                    "Frosh\\Rector\\": "src"
+                    "HeyCart\\PhpStan\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "mit"
+                "MIT"
             ],
-            "description": "HeyCart specific Rector",
+            "description": "PhpStan Rules for HeyCart",
             "support": {
-                "issues": "https://github.com/FriendsOfHeyCart/heycart-rector/issues",
-                "source": "https://github.com/FriendsOfHeyCart/heycart-rector/tree/0.5.6"
+                "issues": "https://github.com/heycartLabs/phpstan-heycart/issues",
+                "source": "https://github.com/heycartLabs/phpstan-heycart/tree/0.1.11"
             },
-            "time": "2025-06-30T10:50:22+00:00"
+            "time": "2025-07-28T13:21:24+00:00"
         },
         {
             "name": "phpstan/extension-installer",
@@ -609,16 +658,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "2.1.17",
+            "version": "2.1.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "89b5ef665716fa2a52ecd2633f21007a6a349053"
+                "reference": "a9ccfef95210f92ba6feea6e8d1eef42b5605499"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/89b5ef665716fa2a52ecd2633f21007a6a349053",
-                "reference": "89b5ef665716fa2a52ecd2633f21007a6a349053",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/a9ccfef95210f92ba6feea6e8d1eef42b5605499",
+                "reference": "a9ccfef95210f92ba6feea6e8d1eef42b5605499",
                 "shasum": ""
             },
             "require": {
@@ -663,7 +712,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-05-21T20:55:28+00:00"
+            "time": "2025-07-26T20:45:26+00:00"
         },
         {
             "name": "phpstan/phpstan-deprecation-rules",
@@ -714,16 +763,16 @@
         },
         {
             "name": "phpstan/phpstan-symfony",
-            "version": "2.0.6",
+            "version": "2.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan-symfony.git",
-                "reference": "5005288e07583546ea00b52de4a9ac412eb869d7"
+                "reference": "392f7ab8f52a0a776977be4e62535358c28e1b15"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-symfony/zipball/5005288e07583546ea00b52de4a9ac412eb869d7",
-                "reference": "5005288e07583546ea00b52de4a9ac412eb869d7",
+                "url": "https://api.github.com/repos/phpstan/phpstan-symfony/zipball/392f7ab8f52a0a776977be4e62535358c28e1b15",
+                "reference": "392f7ab8f52a0a776977be4e62535358c28e1b15",
                 "shasum": ""
             },
             "require": {
@@ -779,9 +828,9 @@
             "description": "Symfony Framework extensions and rules for PHPStan",
             "support": {
                 "issues": "https://github.com/phpstan/phpstan-symfony/issues",
-                "source": "https://github.com/phpstan/phpstan-symfony/tree/2.0.6"
+                "source": "https://github.com/phpstan/phpstan-symfony/tree/2.0.7"
             },
-            "time": "2025-05-14T07:00:05+00:00"
+            "time": "2025-07-22T09:40:57+00:00"
         },
         {
             "name": "psr/container",
@@ -1464,21 +1513,21 @@
         },
         {
             "name": "rector/rector",
-            "version": "2.1.1",
+            "version": "2.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rectorphp/rector.git",
-                "reference": "d0917c069bb0d9bb06ed111cf052510f609015a4"
+                "reference": "40a71441dd73fa150a66102f5ca1364c44fc8fff"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rectorphp/rector/zipball/d0917c069bb0d9bb06ed111cf052510f609015a4",
-                "reference": "d0917c069bb0d9bb06ed111cf052510f609015a4",
+                "url": "https://api.github.com/repos/rectorphp/rector/zipball/40a71441dd73fa150a66102f5ca1364c44fc8fff",
+                "reference": "40a71441dd73fa150a66102f5ca1364c44fc8fff",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.4|^8.0",
-                "phpstan/phpstan": "^2.1.17"
+                "phpstan/phpstan": "^2.1.18"
             },
             "conflict": {
                 "rector/rector-doctrine": "*",
@@ -1512,7 +1561,7 @@
             ],
             "support": {
                 "issues": "https://github.com/rectorphp/rector/issues",
-                "source": "https://github.com/rectorphp/rector/tree/2.1.1"
+                "source": "https://github.com/rectorphp/rector/tree/2.1.2"
             },
             "funding": [
                 {
@@ -1520,7 +1569,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-07-10T11:31:31+00:00"
+            "time": "2025-07-17T19:30:06+00:00"
         },
         {
             "name": "sebastian/diff",
@@ -1588,55 +1637,6 @@
                 }
             ],
             "time": "2024-07-03T04:53:05+00:00"
-        },
-        {
-            "name": "heycartlabs/phpstan-heycart",
-            "version": "0.1.11",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/heycartLabs/phpstan-heycart.git",
-                "reference": "7f18f3b865ce4b9a585594f26cfc24c2182134c8"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/heycartLabs/phpstan-heycart/zipball/7f18f3b865ce4b9a585594f26cfc24c2182134c8",
-                "reference": "7f18f3b865ce4b9a585594f26cfc24c2182134c8",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^8.2",
-                "phpstan/phpstan": "^2",
-                "symfony/polyfill-php84": "*"
-            },
-            "require-dev": {
-                "friendsofphp/php-cs-fixer": "v3.64.0",
-                "phpstan/extension-installer": "*",
-                "phpunit/phpunit": "~11.3.6",
-                "heycart/core": "^6.6"
-            },
-            "type": "library",
-            "extra": {
-                "phpstan": {
-                    "includes": [
-                        "rules.neon"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "HeyCart\\PhpStan\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "PhpStan Rules for HeyCart",
-            "support": {
-                "issues": "https://github.com/heycartLabs/phpstan-heycart/issues",
-                "source": "https://github.com/heycartLabs/phpstan-heycart/tree/0.1.11"
-            },
-            "time": "2025-06-30T08:42:23+00:00"
         },
         {
             "name": "spaze/phpstan-disallowed-calls",
