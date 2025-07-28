@@ -13,7 +13,7 @@ func getTestPlugin(tempDir string) PlatformPlugin {
 		path: tempDir,
 		config: &Config{
 			Store: ConfigStore{
-				Availabilities: &[]string{"German"},
+				Availabilities: &[]string{"Chinese"},
 			},
 		},
 		Composer: PlatformComposerJson{
@@ -35,19 +35,19 @@ func getTestPlugin(tempDir string) PlatformPlugin {
 				HeyCartPluginClass: "FroshTools\\FroshTools",
 				Label: map[string]string{
 					"en-GB": "Frosh Tools",
-					"de-DE": "Frosh Tools",
+					"zh-CN": "Frosh Tools",
 				},
 				Description: map[string]string{
 					"en-GB": "Frosh Tools",
-					"de-DE": "Frosh Tools",
+					"zh-CN": "Frosh Tools",
 				},
 				ManufacturerLink: map[string]string{
 					"en-GB": "Frosh Tools",
-					"de-DE": "Frosh Tools",
+					"zh-CN": "Frosh Tools",
 				},
 				SupportLink: map[string]string{
 					"en-GB": "Frosh Tools",
-					"de-DE": "Frosh Tools",
+					"zh-CN": "Frosh Tools",
 				},
 			},
 		},
@@ -128,7 +128,7 @@ func TestPluginGermanDescriptionMissing(t *testing.T) {
 	plugin.Validate(getTestContext(), check)
 
 	assert.Len(t, check.Results, 1)
-	assert.Equal(t, "extra.description for language de-DE is required", check.Results[0].Message)
+	assert.Equal(t, "extra.description for language zh-CN is required", check.Results[0].Message)
 }
 
 func TestPluginGermanDescriptionMissingOnlyEnglishMarket(t *testing.T) {

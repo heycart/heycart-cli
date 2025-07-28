@@ -169,11 +169,11 @@ func (p HeyCartBundle) GetIconPath() string {
 func (p HeyCartBundle) GetMetaData() *extensionMetadata {
 	return &extensionMetadata{
 		Label: extensionTranslated{
-			German:  "FALLBACK",
+			Chinese: "FALLBACK",
 			English: "FALLBACK",
 		},
 		Description: extensionTranslated{
-			German:  "FALLBACK",
+			Chinese: "FALLBACK",
 			English: "FALLBACK",
 		},
 	}

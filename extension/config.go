@@ -88,7 +88,7 @@ type ConfigExtraBundle struct {
 
 type ConfigStore struct {
 	// Specifies the visibility in stores.
-	Availabilities *[]string `yaml:"availabilities" jsonschema:"enum=German,enum=International"`
+	Availabilities *[]string `yaml:"availabilities" jsonschema:"enum=Chinese,enum=International"`
 	// Specifies the default locale.
 	DefaultLocale *string `yaml:"default_locale" jsonschema:"enum=de_DE,enum=en_GB"`
 	// Specifies the languages the extension is translated.
@@ -151,12 +151,12 @@ type ConfigStoreImage struct {
 }
 
 type ConfigStoreImageActivate struct {
-	German  bool `yaml:"de"`
+	Chinese bool `yaml:"zh"`
 	English bool `yaml:"en"`
 }
 
 type ConfigStoreImagePreview struct {
-	German  bool `yaml:"de"`
+	Chinese bool `yaml:"zh"`
 	English bool `yaml:"en"`
 }
 
@@ -269,13 +269,13 @@ func (c *Config) Dump(dir string) error {
 	return encoder.Encode(c)
 }
 
-func (c *ConfigStore) IsInGermanStore() bool {
+func (c *ConfigStore) IsInEnglishStore() bool {
 	if c.Availabilities == nil {
 		return true
 	}
 
 	for _, availability := range *c.Availabilities {
-		if availability == "German" {
+		if availability == "English" {
 			return true
 		}
 	}

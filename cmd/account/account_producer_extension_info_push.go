@@ -66,8 +66,8 @@ var accountCompanyProducerExtensionInfoPushCmd = &cobra.Command{
 			language := info.Locale.Name[0:2]
 
 			if language == "de" {
-				info.Name = metadata.Label.German
-				info.ShortDescription = metadata.Description.German
+				info.Name = metadata.Label.Chinese
+				info.ShortDescription = metadata.Description.Chinese
 			} else {
 				info.Name = metadata.Label.English
 				info.ShortDescription = metadata.Description.English
@@ -119,8 +119,8 @@ var accountCompanyProducerExtensionInfoPushCmd = &cobra.Command{
 						}
 
 						apiImage.Priority = configImage.Priority
-						apiImage.Details[0].Activated = configImage.Activate.German
-						apiImage.Details[0].Preview = configImage.Preview.German
+						apiImage.Details[0].Activated = configImage.Activate.Chinese
+						apiImage.Details[0].Preview = configImage.Preview.Chinese
 
 						apiImage.Details[1].Activated = configImage.Activate.English
 						apiImage.Details[1].Preview = configImage.Preview.English

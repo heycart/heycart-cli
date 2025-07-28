@@ -233,7 +233,7 @@ func runDefaultValidate(ext Extension, check validation.Check) {
 	})
 
 	metaData := ext.GetMetaData()
-	if len([]rune(metaData.Label.German)) == 0 {
+	if len([]rune(metaData.Label.Chinese)) == 0 {
 		check.AddResult(validation.CheckResult{
 			Path:       rootFile,
 			Identifier: "metadata.label",
@@ -253,11 +253,11 @@ func runDefaultValidate(ext Extension, check validation.Check) {
 
 	// Skip description validation for HeyCartBundle
 	if ext.GetType() != TypeHeyCartBundle {
-		if len([]rune(metaData.Description.German)) == 0 {
+		if len([]rune(metaData.Description.Chinese)) == 0 {
 			check.AddResult(validation.CheckResult{
 				Path:       rootFile,
 				Identifier: "metadata.description",
-				Message:    "in composer.json, description is not translated in german",
+				Message:    "in composer.json, description is not translated in chinese",
 				Severity:   validation.SeverityError,
 			})
 		}
@@ -271,11 +271,11 @@ func runDefaultValidate(ext Extension, check validation.Check) {
 			})
 		}
 
-		if len([]rune(metaData.Description.German)) < 150 || len([]rune(metaData.Description.German)) > 185 {
+		if len([]rune(metaData.Description.Chinese)) < 50 || len([]rune(metaData.Description.Chinese)) > 185 {
 			check.AddResult(validation.CheckResult{
 				Path:       rootFile,
 				Identifier: "metadata.description",
-				Message:    fmt.Sprintf("in composer.json, the german description with length of %d should have a length from 150 up to 185 characters.", len([]rune(metaData.Description.German))),
+				Message:    fmt.Sprintf("in composer.json, the chinese description with length of %d should have a length from 150 up to 185 characters.", len([]rune(metaData.Description.Chinese))),
 				Severity:   validation.SeverityError,
 			})
 		}
