@@ -12,8 +12,8 @@ func MigrateComposerJson(project string) error {
 		return err
 	}
 
-	if composerJson.HasPackage("shopware/recovery") {
-		delete(composerJson.Require, "shopware/recovery")
+	if composerJson.HasPackage("heycart/recovery") {
+		delete(composerJson.Require, "heycart/recovery")
 	}
 
 	composerJson.Require["symfony/flex"] = "^2"
@@ -24,7 +24,7 @@ func MigrateComposerJson(project string) error {
 	}
 
 	composerJson.RequireDev = packagist.ComposerPackageLink{}
-	composerJson.RequireDev["shopware/dev-tools"] = "*"
+	composerJson.RequireDev["heycart/dev-tools"] = "*"
 
 	if composerJson.HasConfig("platform") {
 		delete(composerJson.Config, "platform")
@@ -37,7 +37,7 @@ func MigrateComposerJson(project string) error {
 	composerJson.Extra["symfony"] = map[string]any{
 		"allow-contrib": true,
 		"endpoint": []string{
-			"https://raw.githubusercontent.com/shopware/recipes/flex/main/index.json",
+			"https://raw.githubusercontent.com/heycart/recipes/flex/main/index.json",
 			"flex://defaults",
 		},
 	}

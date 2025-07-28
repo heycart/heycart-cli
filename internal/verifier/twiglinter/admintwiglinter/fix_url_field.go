@@ -32,7 +32,7 @@ func (u UrlFieldFixer) Check(nodes []html.Node) []validation.CheckResult {
 }
 
 func (u UrlFieldFixer) Supports(v *version.Version) bool {
-	return twiglinter.Shopware67Constraint.Check(v)
+	return twiglinter.HeyCart67Constraint.Check(v)
 }
 
 func (u UrlFieldFixer) Fix(nodes []html.Node) error {

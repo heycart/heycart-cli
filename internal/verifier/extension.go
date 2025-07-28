@@ -33,7 +33,7 @@ func ConvertExtensionToToolConfig(ext extension.Extension) (*ToolConfig, error) 
 		StorefrontDirectories: getStorefrontFolders(ext),
 	}
 
-	constraint, err := ext.GetShopwareVersionConstraint()
+	constraint, err := ext.GetHeyCartVersionConstraint()
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ func ConvertExtensionToToolConfig(ext extension.Extension) (*ToolConfig, error) 
 }
 
 func determineVersionRange(cfg *ToolConfig, versionConstraint *version.Constraints) error {
-	versions, err := extension.GetShopwareVersions(context.Background())
+	versions, err := extension.GetHeyCartVersions(context.Background())
 	if err != nil {
 		return err
 	}
@@ -76,8 +76,8 @@ func determineVersionRange(cfg *ToolConfig, versionConstraint *version.Constrain
 		matchingVersions = append(matchingVersions, version.Must(version.NewVersion("6.7.0.0")))
 	}
 
-	cfg.MinShopwareVersion = matchingVersions[0].String()
-	cfg.MaxShopwareVersion = matchingVersions[len(matchingVersions)-1].String()
+	cfg.MinHeyCartVersion = matchingVersions[0].String()
+	cfg.MaxHeyCartVersion = matchingVersions[len(matchingVersions)-1].String()
 
 	return nil
 }

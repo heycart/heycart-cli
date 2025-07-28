@@ -5,7 +5,7 @@ import (
 	"path"
 )
 
-func GetShopwareCliCacheDir() string {
+func GetHeyCartCliCacheDir() string {
 	cacheDir, _ := os.UserCacheDir()
 
 	return path.Join(cacheDir, "heycart-cli")

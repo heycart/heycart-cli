@@ -15,7 +15,7 @@ var projectConfigPullCmd = &cobra.Command{
 	Use:   "pull",
 	Short: "[Deprecated] Synchronizes your shop config to local",
 	RunE: func(cmd *cobra.Command, _ []string) error {
-		logging.FromContext(cmd.Context()).Warnf("This command is deprecated and will be removed in the future. Please use Fixture Bundle instead https://developer.shopware.com/docs/resources/tooling/fixture-bundle/")
+		logging.FromContext(cmd.Context()).Warnf("This command is deprecated and will be removed in the future. Please use Fixture Bundle instead https://developer.heycart.com/docs/resources/tooling/fixture-bundle/")
 
 		var cfg *shop.Config
 		var err error

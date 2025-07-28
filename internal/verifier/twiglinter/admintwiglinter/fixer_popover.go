@@ -32,7 +32,7 @@ func (p PopoverFixer) Check(node []html.Node) []validation.CheckResult {
 }
 
 func (p PopoverFixer) Supports(version *version.Version) bool {
-	return twiglinter.Shopware67Constraint.Check(version)
+	return twiglinter.HeyCart67Constraint.Check(version)
 }
 
 func (p PopoverFixer) Fix(node []html.Node) error {

@@ -5,10 +5,10 @@ dist/
 /completions
 /local
 /.heycart-cli
-/.shopware-project.yml
-/.shopware-project.yaml
+/.heycart-project.yml
+/.heycart-project.yaml
 /test-app
-/go-shopware-admin-api-sdk
+/go-heycart-admin-api-sdk
 /*.zip
 /Frosh*
 /Swag*

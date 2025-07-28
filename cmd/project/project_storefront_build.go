@@ -25,7 +25,7 @@ var projectStorefrontBuildCmd = &cobra.Command{
 			if err != nil {
 				return err
 			}
-		} else if projectRoot, err = findClosestShopwareProject(); err != nil {
+		} else if projectRoot, err = findClosestHeyCartProject(); err != nil {
 			return err
 		}
 
@@ -47,15 +47,15 @@ var projectStorefrontBuildCmd = &cobra.Command{
 
 		forceInstall, _ := cmd.PersistentFlags().GetBool("force-install-dependencies")
 
-		shopwareConstraint, err := extension.GetShopwareProjectConstraint(projectRoot)
+		heycartConstraint, err := extension.GetHeyCartProjectConstraint(projectRoot)
 		if err != nil {
 			return err
 		}
 
 		assetCfg := extension.AssetBuildConfig{
 			DisableAdminBuild: true,
-			ShopwareRoot:      projectRoot,
-			ShopwareVersion:   shopwareConstraint,
+			HeyCartRoot:       projectRoot,
+			HeyCartVersion:    heycartConstraint,
 			NPMForceInstall:   forceInstall,
 			ContributeProject: extension.IsContributeProject(projectRoot),
 		}

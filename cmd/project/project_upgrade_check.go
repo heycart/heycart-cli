@@ -22,7 +22,7 @@ import (
 
 var projectUpgradeCheckCmd = &cobra.Command{
 	Use:   "upgrade-check",
-	Short: "Check that installed extensions are compatible with a future Shopware version",
+	Short: "Check that installed extensions are compatible with a future HeyCart version",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		var cfg *shop.Config
 		var err error
@@ -34,7 +34,7 @@ var projectUpgradeCheckCmd = &cobra.Command{
 		}
 
 		if cfg.IsAdminAPIConfigured() {
-			logging.FromContext(cmd.Context()).Debugf("Using Shopware Admin API to lookup for available extensions")
+			logging.FromContext(cmd.Context()).Debugf("Using HeyCart Admin API to lookup for available extensions")
 			client, err := shop.NewShopClient(cmd.Context(), cfg)
 			if err != nil {
 				return err
@@ -62,7 +62,7 @@ var projectUpgradeCheckCmd = &cobra.Command{
 			}
 		}
 
-		versions, err := extension.GetShopwareVersions(cmd.Context())
+		versions, err := extension.GetHeyCartVersions(cmd.Context())
 		if err != nil {
 			return err
 		}
@@ -87,7 +87,7 @@ var projectUpgradeCheckCmd = &cobra.Command{
 		}
 
 		if len(possibleVersions) == 0 {
-			fmt.Println("You are on the latest version of Shopware")
+			fmt.Println("You are on the latest version of HeyCart")
 			return nil
 		}
 
@@ -95,7 +95,7 @@ var projectUpgradeCheckCmd = &cobra.Command{
 
 		prompt := huh.NewSelect[string]().
 			Height(10).
-			Title("Select a Shopware version to check compatibility").
+			Title("Select a HeyCart version to check compatibility").
 			Options(
 				huh.NewOptions(possibleVersions...)...,
 			).
@@ -158,7 +158,7 @@ func init() {
 }
 
 func getLocalExtensions() (*version.Version, map[string]string, error) {
-	project, err := findClosestShopwareProject()
+	project, err := findClosestHeyCartProject()
 	if err != nil {
 		return nil, nil, err
 	}
@@ -168,10 +168,10 @@ func getLocalExtensions() (*version.Version, map[string]string, error) {
 		return nil, nil, fmt.Errorf("failed to read composer.lock: %w", err)
 	}
 
-	corePackage := composerLock.GetPackage("shopware/core")
+	corePackage := composerLock.GetPackage("heycart/core")
 
 	if corePackage == nil {
-		return nil, nil, fmt.Errorf("shopware/core package not found in composer.lock")
+		return nil, nil, fmt.Errorf("heycart/core package not found in composer.lock")
 	}
 
 	currentVersion, err := version.NewVersion(strings.TrimPrefix(corePackage.Version, "v"))

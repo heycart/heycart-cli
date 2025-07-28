@@ -372,19 +372,19 @@ func PrepareFolderForZipping(ctx context.Context, path string, ext Extension, ex
 		return fmt.Errorf(errorFormat, err)
 	}
 
-	minShopwareVersionConstraint, err := ext.GetShopwareVersionConstraint()
+	minHeyCartVersionConstraint, err := ext.GetHeyCartVersionConstraint()
 	if err != nil {
 		return fmt.Errorf(errorFormat, err)
 	}
 
-	minVersion, err := lookupForMinMatchingVersion(ctx, minShopwareVersionConstraint)
+	minVersion, err := lookupForMinMatchingVersion(ctx, minHeyCartVersionConstraint)
 	if err != nil {
 		return fmt.Errorf("lookup for min matching version: %w", err)
 	}
 
-	shopware65Constraint, _ := version.NewConstraint(">=6.5.0")
+	heycart65Constraint, _ := version.NewConstraint(">=6.5.0")
 
-	if shopware65Constraint.Check(version.Must(version.NewVersion(minVersion))) {
+	if heycart65Constraint.Check(version.Must(version.NewVersion(minVersion))) {
 		return nil
 	}
 
@@ -483,7 +483,7 @@ func filterRequires(composer map[string]interface{}, extCfg *Config) map[string]
 	provide := composer["provide"]
 	require := composer["require"]
 
-	keys := []string{"shopware/platform", "shopware/core", "shopware/shopware", "shopware/storefront", "shopware/administration", "shopware/elasticsearch", "composer/installers"}
+	keys := []string{"heycart/platform", "heycart/core", "heycart/heycart", "heycart/storefront", "heycart/administration", "heycart/elasticsearch", "composer/installers"}
 	if extCfg != nil {
 		keys = append(keys, extCfg.Build.Zip.Composer.ExcludedPackages...)
 	}
@@ -518,7 +518,7 @@ func addComposerReplacements(composer map[string]interface{}, minVersion string)
 	}
 
 	for _, component := range components {
-		packageName := fmt.Sprintf("shopware/%s", component)
+		packageName := fmt.Sprintf("heycart/%s", component)
 
 		if _, ok := require.(map[string]interface{})[packageName]; ok {
 			composerFile, err := composerInfo.Open(fmt.Sprintf("%s/%s.json", minVersion, component))
@@ -562,17 +562,17 @@ type packagistResponse struct {
 	Packages struct {
 		Core []struct {
 			Version string `json:"version_normalized"`
-		} `json:"shopware/core"`
+		} `json:"heycart/core"`
 	} `json:"packages"`
 }
 
-func GetShopwareVersions(ctx context.Context) ([]string, error) {
-	req, err := http.NewRequestWithContext(ctx, http.MethodGet, "https://repo.packagist.org/p2/shopware/core.json", http.NoBody)
+func GetHeyCartVersions(ctx context.Context) ([]string, error) {
+	req, err := http.NewRequestWithContext(ctx, http.MethodGet, "https://repo.packagist.org/p2/heycart/core.json", http.NoBody)
 	if err != nil {
 		return nil, fmt.Errorf("create composer version request: %w", err)
 	}
 
-	req.Header.Set("User-Agent", "Shopware CLI")
+	req.Header.Set("User-Agent", "HeyCart CLI")
 
 	resp, err := http.DefaultClient.Do(req)
 	if err != nil {
@@ -604,9 +604,9 @@ func GetShopwareVersions(ctx context.Context) ([]string, error) {
 }
 
 func lookupForMinMatchingVersion(ctx context.Context, versionConstraint *version.Constraints) (string, error) {
-	versions, err := GetShopwareVersions(ctx)
+	versions, err := GetHeyCartVersions(ctx)
 	if err != nil {
-		return "", fmt.Errorf("get shopware versions: %w", err)
+		return "", fmt.Errorf("get heycart versions: %w", err)
 	}
 
 	return getMinMatchingVersion(versionConstraint, versions), nil

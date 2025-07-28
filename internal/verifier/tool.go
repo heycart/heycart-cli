@@ -27,11 +27,11 @@ type ToolConfig struct {
 
 	InputWasDirectory bool
 
-	// The minimum version of Shopware that is supported
-	MinShopwareVersion string
-	// The maximum version of Shopware that is supported
-	MaxShopwareVersion string
-	// The version of Shopware that is checked against
+	// The minimum version of HeyCart that is supported
+	MinHeyCartVersion string
+	// The maximum version of HeyCart that is supported
+	MaxHeyCartVersion string
+	// The version of HeyCart that is checked against
 	CheckAgainst string
 	// The root directory of the extension/project
 	RootDir string

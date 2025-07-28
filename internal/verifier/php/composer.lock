@@ -510,16 +510,16 @@
             "time": "2025-07-08T21:13:15+00:00"
         },
         {
-            "name": "frosh/shopware-rector",
+            "name": "frosh/heycart-rector",
             "version": "0.5.6",
             "source": {
                 "type": "git",
-                "url": "https://github.com/FriendsOfShopware/shopware-rector.git",
+                "url": "https://github.com/FriendsOfHeyCart/heycart-rector.git",
                 "reference": "4f25cb8edb00816ea05d05ee3e8ee12b0213406d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfShopware/shopware-rector/zipball/4f25cb8edb00816ea05d05ee3e8ee12b0213406d",
+                "url": "https://api.github.com/repos/FriendsOfHeyCart/heycart-rector/zipball/4f25cb8edb00816ea05d05ee3e8ee12b0213406d",
                 "reference": "4f25cb8edb00816ea05d05ee3e8ee12b0213406d",
                 "shasum": ""
             },
@@ -552,10 +552,10 @@
             "license": [
                 "mit"
             ],
-            "description": "Shopware specific Rector",
+            "description": "HeyCart specific Rector",
             "support": {
-                "issues": "https://github.com/FriendsOfShopware/shopware-rector/issues",
-                "source": "https://github.com/FriendsOfShopware/shopware-rector/tree/0.5.6"
+                "issues": "https://github.com/FriendsOfHeyCart/heycart-rector/issues",
+                "source": "https://github.com/FriendsOfHeyCart/heycart-rector/tree/0.5.6"
             },
             "time": "2025-06-30T10:50:22+00:00"
         },
@@ -1590,16 +1590,16 @@
             "time": "2024-07-03T04:53:05+00:00"
         },
         {
-            "name": "shopwarelabs/phpstan-shopware",
+            "name": "heycartlabs/phpstan-heycart",
             "version": "0.1.11",
             "source": {
                 "type": "git",
-                "url": "https://github.com/shopwareLabs/phpstan-shopware.git",
+                "url": "https://github.com/heycartLabs/phpstan-heycart.git",
                 "reference": "7f18f3b865ce4b9a585594f26cfc24c2182134c8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/shopwareLabs/phpstan-shopware/zipball/7f18f3b865ce4b9a585594f26cfc24c2182134c8",
+                "url": "https://api.github.com/repos/heycartLabs/phpstan-heycart/zipball/7f18f3b865ce4b9a585594f26cfc24c2182134c8",
                 "reference": "7f18f3b865ce4b9a585594f26cfc24c2182134c8",
                 "shasum": ""
             },
@@ -1612,7 +1612,7 @@
                 "friendsofphp/php-cs-fixer": "v3.64.0",
                 "phpstan/extension-installer": "*",
                 "phpunit/phpunit": "~11.3.6",
-                "shopware/core": "^6.6"
+                "heycart/core": "^6.6"
             },
             "type": "library",
             "extra": {
@@ -1624,17 +1624,17 @@
             },
             "autoload": {
                 "psr-4": {
-                    "Shopware\\PhpStan\\": "src/"
+                    "HeyCart\\PhpStan\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
-            "description": "PhpStan Rules for Shopware",
+            "description": "PhpStan Rules for HeyCart",
             "support": {
-                "issues": "https://github.com/shopwareLabs/phpstan-shopware/issues",
-                "source": "https://github.com/shopwareLabs/phpstan-shopware/tree/0.1.11"
+                "issues": "https://github.com/heycartLabs/phpstan-heycart/issues",
+                "source": "https://github.com/heycartLabs/phpstan-heycart/tree/0.1.11"
             },
             "time": "2025-06-30T08:42:23+00:00"
         },

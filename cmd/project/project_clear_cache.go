@@ -25,7 +25,7 @@ var projectClearCacheCmd = &cobra.Command{
 		if cfg.AdminApi == nil {
 			logging.FromContext(cmd.Context()).Infof("Clearing cache localy")
 
-			projectRoot, err := findClosestShopwareProject()
+			projectRoot, err := findClosestHeyCartProject()
 			if err != nil {
 				return err
 			}

@@ -17,16 +17,16 @@ import (
 const (
 	TypePlatformApp    = "app"
 	TypePlatformPlugin = "plugin"
-	TypeShopwareBundle = "shopware-bundle"
+	TypeHeyCartBundle  = "heycart-bundle"
 
-	ComposerTypePlugin = "shopware-platform-plugin"
-	ComposerTypeApp    = "shopware-app"
-	ComposerTypeBundle = "shopware-bundle"
+	ComposerTypePlugin = "heycart-platform-plugin"
+	ComposerTypeApp    = "heycart-app"
+	ComposerTypeBundle = "heycart-bundle"
 )
 
 func GetExtensionByFolder(path string) (Extension, error) {
 	if _, err := os.Stat(fmt.Sprintf("%s/plugin.xml", path)); err == nil {
-		return nil, fmt.Errorf("shopware 5 is not supported. Please use https://github.com/FriendsOfShopware/FroshPluginUploader instead")
+		return nil, fmt.Errorf("heycart 5 is not supported. Please use https://github.com/FriendsOfHeyCart/FroshPluginUploader instead")
 	}
 
 	if _, err := os.Stat(fmt.Sprintf("%s/manifest.xml", path)); err == nil {
@@ -42,7 +42,7 @@ func GetExtensionByFolder(path string) (Extension, error) {
 	ext, err := newPlatformPlugin(path)
 	if err != nil {
 		if errors.Is(err, ErrPlatformInvalidType) {
-			ext, err = newShopwareBundle(path)
+			ext, err = newHeyCartBundle(path)
 		} else {
 			return nil, err
 		}
@@ -113,7 +113,7 @@ type Extension interface {
 	GetSourceDirs() []string
 	GetVersion() (*version.Version, error)
 	GetLicense() (string, error)
-	GetShopwareVersionConstraint() (*version.Constraints, error)
+	GetHeyCartVersionConstraint() (*version.Constraints, error)
 	GetType() string
 	GetPath() string
 	GetChangelog() (*ExtensionChangelog, error)

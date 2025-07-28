@@ -24,7 +24,7 @@ import (
 
 var projectCreateCmd = &cobra.Command{
 	Use:   "create [name] [version]",
-	Short: "Create a new Shopware 6 project",
+	Short: "Create a new HeyCart 6 project",
 	Args:  cobra.MinimumNArgs(1),
 	ValidArgsFunction: func(cmd *cobra.Command, args []string, toComplete string) ([]string, cobra.ShellCompDirective) {
 		if len(args) == 1 {
@@ -123,7 +123,7 @@ var projectCreateCmd = &cobra.Command{
 			return err
 		}
 
-		logging.FromContext(cmd.Context()).Infof("Setting up Shopware %s", chooseVersion)
+		logging.FromContext(cmd.Context()).Infof("Setting up HeyCart %s", chooseVersion)
 
 		composerJson, err := generateComposerJson(cmd.Context(), chooseVersion, strings.Contains(chooseVersion, "rc"))
 		if err != nil {
@@ -184,7 +184,7 @@ var projectCreateCmd = &cobra.Command{
 }
 
 func getFilteredInstallVersions(ctx context.Context) ([]*version.Version, error) {
-	releases, err := fetchAvailableShopwareVersions(ctx)
+	releases, err := fetchAvailableHeyCartVersions(ctx)
 	if err != nil {
 		return nil, err
 	}
@@ -209,8 +209,8 @@ func init() {
 	projectRootCmd.AddCommand(projectCreateCmd)
 }
 
-func fetchAvailableShopwareVersions(ctx context.Context) ([]string, error) {
-	r, err := http.NewRequestWithContext(ctx, http.MethodGet, "https://releases.shopware.com/changelog/index.json", http.NoBody)
+func fetchAvailableHeyCartVersions(ctx context.Context) ([]string, error) {
+	r, err := http.NewRequestWithContext(ctx, http.MethodGet, "https://releases.heycart.com/changelog/index.json", http.NoBody)
 	if err != nil {
 		return nil, err
 	}
@@ -222,7 +222,7 @@ func fetchAvailableShopwareVersions(ctx context.Context) ([]string, error) {
 
 	defer func() {
 		if err := resp.Body.Close(); err != nil {
-			logging.FromContext(ctx).Errorf("fetchAvailableShopwareVersions: %v", err)
+			logging.FromContext(ctx).Errorf("fetchAvailableHeyCartVersions: %v", err)
 		}
 	}()
 
@@ -242,15 +242,15 @@ func fetchAvailableShopwareVersions(ctx context.Context) ([]string, error) {
 
 func generateComposerJson(ctx context.Context, version string, rc bool) (string, error) {
 	tplContent, err := template.New("composer.json").Parse(`{
-    "name": "shopware/production",
+    "name": "heycart/production",
     "license": "MIT",
     "type": "project",
     "require": {
         "composer-runtime-api": "^2.0",
-        "shopware/administration": "{{ .DependingVersions }}",
-        "shopware/core": "{{ .Version }}",
-        "shopware/elasticsearch": "{{ .DependingVersions }}",
-        "shopware/storefront": "{{ .DependingVersions }}",
+        "heycart/administration": "{{ .DependingVersions }}",
+        "heycart/core": "{{ .Version }}",
+        "heycart/elasticsearch": "{{ .DependingVersions }}",
+        "heycart/storefront": "{{ .DependingVersions }}",
         "symfony/flex": "~2"
     },
     "repositories": [
@@ -307,7 +307,7 @@ func generateComposerJson(ctx context.Context, version string, rc bool) (string,
         "symfony": {
             "allow-contrib": true,
             "endpoint": [
-                "https://raw.githubusercontent.com/shopware/recipes/flex/main/index.json",
+                "https://raw.githubusercontent.com/heycart/recipes/flex/main/index.json",
                 "flex://defaults"
             ]
         }
@@ -350,7 +350,7 @@ func generateComposerJson(ctx context.Context, version string, rc bool) (string,
 var kernelFallbackRegExp = regexp.MustCompile(`(?m)SHOPWARE_FALLBACK_VERSION\s*=\s*'?"?(\d+\.\d+)`)
 
 func getLatestFallbackVersion(ctx context.Context, branch string) (string, error) {
-	r, err := http.NewRequestWithContext(ctx, http.MethodGet, fmt.Sprintf("https://raw.githubusercontent.com/shopware/core/refs/heads/%s/Kernel.php", branch), http.NoBody)
+	r, err := http.NewRequestWithContext(ctx, http.MethodGet, fmt.Sprintf("https://raw.githubusercontent.com/heycart/core/refs/heads/%s/Kernel.php", branch), http.NoBody)
 	if err != nil {
 		return "", err
 	}
@@ -380,7 +380,7 @@ func getLatestFallbackVersion(ctx context.Context, branch string) (string, error
 	matches := kernelFallbackRegExp.FindSubmatch(content)
 
 	if len(matches) < 2 {
-		return "", fmt.Errorf("could not determine shopware version")
+		return "", fmt.Errorf("could not determine heycart version")
 	}
 
 	return string(matches[1]), nil

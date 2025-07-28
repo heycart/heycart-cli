@@ -72,7 +72,7 @@ var accountCompanyProducerExtensionUploadCmd = &cobra.Command{
 			return err
 		}
 
-		constraint, err := zipExt.GetShopwareVersionConstraint()
+		constraint, err := zipExt.GetHeyCartVersionConstraint()
 		if err != nil {
 			return err
 		}

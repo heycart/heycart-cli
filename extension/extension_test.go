@@ -64,7 +64,7 @@ func (m *mockExtension) GetLicense() (string, error) {
 	return "MIT", nil
 }
 
-func (m *mockExtension) GetShopwareVersionConstraint() (*version.Constraints, error) {
+func (m *mockExtension) GetHeyCartVersionConstraint() (*version.Constraints, error) {
 	c, err := version.NewConstraint(">= 6.5")
 	if err != nil {
 		return nil, err
@@ -126,7 +126,7 @@ func TestMockExtension(t *testing.T) {
 	assert.NoError(t, err)
 	assert.Equal(t, "MIT", license)
 
-	constraint, err := ext.GetShopwareVersionConstraint()
+	constraint, err := ext.GetHeyCartVersionConstraint()
 	assert.NoError(t, err)
 	v650, _ := version.NewVersion("6.5.0")
 	assert.True(t, constraint.Check(v650))

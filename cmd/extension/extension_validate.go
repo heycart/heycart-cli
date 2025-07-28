@@ -127,7 +127,7 @@ func init() {
 	extensionValidateCmd.PersistentFlags().Bool("full", false, "Run full validation including PHPStan, ESLint and Stylelint")
 	extensionValidateCmd.PersistentFlags().Bool("store-compliance", false, "Runs specific store compliance checks")
 	extensionValidateCmd.PersistentFlags().String("reporter", "", "Reporting format (summary, json, github, junit, markdown)")
-	extensionValidateCmd.PersistentFlags().String("check-against", "highest", "Check against Shopware Version (highest, lowest)")
+	extensionValidateCmd.PersistentFlags().String("check-against", "highest", "Check against HeyCart Version (highest, lowest)")
 	extensionValidateCmd.PersistentFlags().String("only", "", "Run only specific tools by name (comma-separated, e.g. phpstan,eslint)")
 	extensionValidateCmd.PreRunE = func(cmd *cobra.Command, args []string) error {
 		reporter, _ := cmd.Flags().GetString("reporter")

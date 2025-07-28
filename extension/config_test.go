@@ -18,7 +18,7 @@ validation:
 
 	tmpDir := t.TempDir()
 
-	assert.NoError(t, os.WriteFile(filepath.Join(tmpDir, ".shopware-extension.yaml"), []byte(cfg), 0o644))
+	assert.NoError(t, os.WriteFile(filepath.Join(tmpDir, ".heycart-extension.yaml"), []byte(cfg), 0o644))
 
 	ext, err := readExtensionConfig(tmpDir)
 	assert.NoError(t, err)
@@ -38,7 +38,7 @@ validation:
 
 	tmpDir := t.TempDir()
 
-	assert.NoError(t, os.WriteFile(filepath.Join(tmpDir, ".shopware-extension.yaml"), []byte(cfg), 0o644))
+	assert.NoError(t, os.WriteFile(filepath.Join(tmpDir, ".heycart-extension.yaml"), []byte(cfg), 0o644))
 
 	ext, err := readExtensionConfig(tmpDir)
 	assert.NoError(t, err)

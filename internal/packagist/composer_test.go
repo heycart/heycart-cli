@@ -13,7 +13,7 @@ func TestComposerJsonRepositoriesHasRepository(t *testing.T) {
 	repos := ComposerJsonRepositories{
 		{
 			Type: "vcs",
-			URL:  "https://github.com/shopware/platform",
+			URL:  "https://github.com/heycart/platform",
 		},
 		{
 			Type: "composer",
@@ -21,9 +21,9 @@ func TestComposerJsonRepositoriesHasRepository(t *testing.T) {
 		},
 	}
 
-	assert.True(t, repos.HasRepository("https://github.com/shopware/platform"))
+	assert.True(t, repos.HasRepository("https://github.com/heycart/platform"))
 	assert.True(t, repos.HasRepository("https://packages.example.org"))
-	assert.False(t, repos.HasRepository("https://github.com/shopware/core"))
+	assert.False(t, repos.HasRepository("https://github.com/heycart/core"))
 	assert.False(t, repos.HasRepository(""))
 }
 
@@ -67,15 +67,15 @@ func TestComposerJsonSave(t *testing.T) {
 
 	composer := &ComposerJson{
 		path:        composerFile,
-		Name:        "shopware/cli",
-		Description: "Shopware CLI tool",
+		Name:        "heycart/cli",
+		Description: "HeyCart CLI tool",
 		Version:     "1.0.0",
 		Type:        "library",
 		License:     "MIT",
 		Authors: []ComposerJsonAuthor{
 			{
-				Name:  "Shopware AG",
-				Email: "info@shopware.com",
+				Name:  "HeyCart AG",
+				Email: "info@heycart.com",
 			},
 		},
 		Require: ComposerPackageLink{
@@ -88,7 +88,7 @@ func TestComposerJsonSave(t *testing.T) {
 		Repositories: ComposerJsonRepositories{
 			{
 				Type: "vcs",
-				URL:  "https://github.com/shopware/platform",
+				URL:  "https://github.com/heycart/platform",
 			},
 		},
 	}
@@ -129,8 +129,8 @@ func TestReadComposerJson(t *testing.T) {
 		composerFile := filepath.Join(tempDir, "composer.json")
 
 		testComposer := ComposerJson{
-			Name:        "shopware/cli",
-			Description: "Shopware CLI tool",
+			Name:        "heycart/cli",
+			Description: "HeyCart CLI tool",
 			Version:     "1.0.0",
 			Require: ComposerPackageLink{
 				"php": "^7.4 || ^8.0",
@@ -138,7 +138,7 @@ func TestReadComposerJson(t *testing.T) {
 			Repositories: ComposerJsonRepositories{
 				{
 					Type: "vcs",
-					URL:  "https://github.com/shopware/platform",
+					URL:  "https://github.com/heycart/platform",
 				},
 			},
 		}
@@ -151,12 +151,12 @@ func TestReadComposerJson(t *testing.T) {
 		composer, err := ReadComposerJson(composerFile)
 		assert.NoError(t, err)
 		assert.Equal(t, composerFile, composer.path)
-		assert.Equal(t, "shopware/cli", composer.Name)
-		assert.Equal(t, "Shopware CLI tool", composer.Description)
+		assert.Equal(t, "heycart/cli", composer.Name)
+		assert.Equal(t, "HeyCart CLI tool", composer.Description)
 		assert.Equal(t, "1.0.0", composer.Version)
 		assert.Equal(t, "^7.4 || ^8.0", composer.Require["php"])
 		assert.Equal(t, "vcs", composer.Repositories[0].Type)
-		assert.Equal(t, "https://github.com/shopware/platform", composer.Repositories[0].URL)
+		assert.Equal(t, "https://github.com/heycart/platform", composer.Repositories[0].URL)
 	})
 
 	// Test with non-existing file
@@ -193,7 +193,7 @@ func TestReadComposerJsonDifferentRepositoryWritings(t *testing.T) {
 	"repositories": [
 		{
 			"type": "vcs",
-			"url": "https://github.com/shopware/platform"
+			"url": "https://github.com/heycart/platform"
 		},
 		{
 			"type": "path",
@@ -210,7 +210,7 @@ func TestReadComposerJsonDifferentRepositoryWritings(t *testing.T) {
 		assert.Equal(t, composerFile, composer.path)
 
 		expectedRepos := []ComposerJsonRepository{
-			{Type: "vcs", URL: "https://github.com/shopware/platform"},
+			{Type: "vcs", URL: "https://github.com/heycart/platform"},
 			{Type: "path", URL: "custom/plugins"},
 		}
 		assert.ElementsMatch(t, expectedRepos, composer.Repositories)
@@ -225,7 +225,7 @@ func TestReadComposerJsonDifferentRepositoryWritings(t *testing.T) {
 	"repositories": {
 		"remote": {
 			"type": "vcs",
-			"url": "https://github.com/shopware/platform"
+			"url": "https://github.com/heycart/platform"
 		},
 		"local": {
 			"type": "path",
@@ -242,7 +242,7 @@ func TestReadComposerJsonDifferentRepositoryWritings(t *testing.T) {
 		assert.Equal(t, composerFile, composer.path)
 
 		expectedRepos := []ComposerJsonRepository{
-			{Type: "vcs", URL: "https://github.com/shopware/platform"},
+			{Type: "vcs", URL: "https://github.com/heycart/platform"},
 			{Type: "path", URL: "custom/plugins"},
 		}
 		assert.ElementsMatch(t, expectedRepos, composer.Repositories)

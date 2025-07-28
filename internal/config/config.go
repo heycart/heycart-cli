@@ -36,7 +36,7 @@ type ExtensionConfig struct {
 	Name             string
 	Namespace        string
 	ComposerPackage  string
-	ShopwareVersion  string
+	HeyCartVersion   string
 	Description      string
 	License          string
 	Label            string

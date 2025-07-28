@@ -10,18 +10,18 @@ import (
 )
 
 var (
-	ErrNoComposerFileFound        = errors.New("could not determine Shopware version as no composer.json or composer.lock file was found")
-	ErrShopwareDependencyNotFound = errors.New("could not determine Shopware version as no shopware/core dependency was found")
+	ErrNoComposerFileFound       = errors.New("could not determine HeyCart version as no composer.json or composer.lock file was found")
+	ErrHeyCartDependencyNotFound = errors.New("could not determine HeyCart version as no heycart/core dependency was found")
 )
 
-func IsShopwareVersion(projectRoot string, requiredVersion string) (bool, error) {
+func IsHeyCartVersion(projectRoot string, requiredVersion string) (bool, error) {
 	composerJson := path.Join(projectRoot, "composer.json")
 	composerLock := path.Join(projectRoot, "composer.lock")
 
 	if _, err := os.Stat(composerLock); err == nil {
 		found, err := determineByComposerLock(composerLock, requiredVersion)
 
-		if !errors.Is(err, ErrShopwareDependencyNotFound) {
+		if !errors.Is(err, ErrHeyCartDependencyNotFound) {
 			return found, err
 		}
 	}
@@ -54,7 +54,7 @@ func determineByComposerLock(composerLock, requiredVersion string) (bool, error)
 	constraint := version.MustConstraints(version.NewConstraint(requiredVersion))
 
 	for _, pkg := range lock.Packages {
-		if pkg.Name == "shopware/core" {
+		if pkg.Name == "heycart/core" {
 			if constraint.Check(version.Must(version.NewVersion(pkg.Version))) {
 				return true, nil
 			}
@@ -63,7 +63,7 @@ func determineByComposerLock(composerLock, requiredVersion string) (bool, error)
 		}
 	}
 
-	return false, ErrShopwareDependencyNotFound
+	return false, ErrHeyCartDependencyNotFound
 }
 
 type composerJsonStruct struct {
@@ -81,9 +81,9 @@ func determineByComposerJson(composerJson string) (bool, error) {
 		return false, err
 	}
 
-	if jsonStruct.Name == "shopware/platform" {
+	if jsonStruct.Name == "heycart/platform" {
 		return true, nil
 	}
 
-	return false, ErrShopwareDependencyNotFound
+	return false, ErrHeyCartDependencyNotFound
 }

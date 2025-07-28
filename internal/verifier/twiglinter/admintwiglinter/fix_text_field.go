@@ -32,7 +32,7 @@ func (t TextFieldFixer) Check(nodes []html.Node) []validation.CheckResult {
 }
 
 func (t TextFieldFixer) Supports(v *version.Version) bool {
-	return twiglinter.Shopware67Constraint.Check(v)
+	return twiglinter.HeyCart67Constraint.Check(v)
 }
 
 func (t TextFieldFixer) Fix(nodes []html.Node) error {

@@ -35,7 +35,7 @@ var projectWorkerCmd = &cobra.Command{
 		gracefulStopLimit, _ := cobraCmd.Flags().GetUint("graceful-stop-limit")
 		messagesLimit, _ := cobraCmd.Flags().GetUint("limit")
 
-		if projectRoot, err = findClosestShopwareProject(); err != nil {
+		if projectRoot, err = findClosestHeyCartProject(); err != nil {
 			return err
 		}
 
@@ -69,9 +69,9 @@ var projectWorkerCmd = &cobra.Command{
 		}
 
 		if queuesToConsume == "" {
-			if is, _ := shop.IsShopwareVersion(projectRoot, ">=6.5.7"); is {
+			if is, _ := shop.IsHeyCartVersion(projectRoot, ">=6.5.7"); is {
 				consumeArgs = append(consumeArgs, "async", "failed", "low_priority")
-			} else if is, _ := shop.IsShopwareVersion(projectRoot, ">=6.5"); is {
+			} else if is, _ := shop.IsHeyCartVersion(projectRoot, ">=6.5"); is {
 				consumeArgs = append(consumeArgs, "async", "failed")
 			}
 		} else {

@@ -37,14 +37,14 @@ func TestCheckboxFieldFixer(t *testing.T) {
 		{
 			description: "convert label slot to label prop",
 			before: `<sw-checkbox-field><template #label>
-        Hello Shopware
+        Hello HeyCart
     </template></sw-checkbox-field>`,
-			after: `<mt-checkbox label="Hello Shopware"></mt-checkbox>`,
+			after: `<mt-checkbox label="Hello HeyCart"></mt-checkbox>`,
 		},
 		{
 			description: "remove hint slot",
 			before: `<sw-checkbox-field><template v-slot:hint>
-        Hello Shopware
+        Hello HeyCart
     </template></sw-checkbox-field>`,
 			after: `<mt-checkbox></mt-checkbox>`,
 		},

@@ -37,8 +37,8 @@ type AssetBuildConfig struct {
 	CleanupNodeModules           bool
 	DisableAdminBuild            bool
 	DisableStorefrontBuild       bool
-	ShopwareRoot                 string
-	ShopwareVersion              *version.Constraints
+	HeyCartRoot                  string
+	HeyCartVersion               *version.Constraints
 	Browserslist                 string
 	SkipExtensionsWithBuildFiles bool
 	NPMForceInstall              bool
@@ -59,21 +59,21 @@ func BuildAssetsForExtensions(ctx context.Context, sources []asset.Source, asset
 		return nil
 	}
 
-	minVersion, err := lookupForMinMatchingVersion(ctx, assetConfig.ShopwareVersion)
+	minVersion, err := lookupForMinMatchingVersion(ctx, assetConfig.HeyCartVersion)
 	if err != nil {
 		return err
 	}
 
-	requiresShopwareSources := cfgs.RequiresShopwareRepository()
+	requiresHeyCartSources := cfgs.RequiresHeyCartRepository()
 
-	shopwareRoot := assetConfig.ShopwareRoot
-	if shopwareRoot == "" && requiresShopwareSources {
-		shopwareRoot, err = setupShopwareInTemp(ctx, minVersion)
+	heycartRoot := assetConfig.HeyCartRoot
+	if heycartRoot == "" && requiresHeyCartSources {
+		heycartRoot, err = setupHeyCartInTemp(ctx, minVersion)
 		if err != nil {
 			return err
 		}
 
-		defer deletePaths(ctx, shopwareRoot)
+		defer deletePaths(ctx, heycartRoot)
 	}
 
 	nodeInstallSection := ci.Default.Section(ctx, "Installing node_modules for extensions")
@@ -85,9 +85,9 @@ func BuildAssetsForExtensions(ctx context.Context, sources []asset.Source, asset
 
 	nodeInstallSection.End(ctx)
 
-	if shopwareRoot != "" && len(assetConfig.KeepNodeModules) > 0 {
+	if heycartRoot != "" && len(assetConfig.KeepNodeModules) > 0 {
 		paths = slices.DeleteFunc(paths, func(path string) bool {
-			rel, err := filepath.Rel(shopwareRoot, path)
+			rel, err := filepath.Rel(heycartRoot, path)
 			if err != nil {
 				return false
 			}
@@ -120,11 +120,11 @@ func BuildAssetsForExtensions(ctx context.Context, sources []asset.Source, asset
 		nonCompatibleExtensions := cfgs.FilterByAdminAndEsBuild(false)
 
 		if len(nonCompatibleExtensions) != 0 {
-			if err := prepareShopwareForAsset(shopwareRoot, nonCompatibleExtensions); err != nil {
+			if err := prepareHeyCartForAsset(heycartRoot, nonCompatibleExtensions); err != nil {
 				return err
 			}
 
-			administrationRoot := PlatformPath(shopwareRoot, "Administration", "Resources/app/administration")
+			administrationRoot := PlatformPath(heycartRoot, "Administration", "Resources/app/administration")
 
 			if assetConfig.NPMForceInstall || !nodeModulesExists(administrationRoot) {
 				var additionalNpmParameters []string
@@ -143,7 +143,7 @@ func BuildAssetsForExtensions(ctx context.Context, sources []asset.Source, asset
 				}
 			}
 
-			envList := []string{fmt.Sprintf("PROJECT_ROOT=%s", shopwareRoot), fmt.Sprintf("ADMIN_ROOT=%s", PlatformPath(shopwareRoot, "Administration", ""))}
+			envList := []string{fmt.Sprintf("PROJECT_ROOT=%s", heycartRoot), fmt.Sprintf("ADMIN_ROOT=%s", PlatformPath(heycartRoot, "Administration", ""))}
 
 			if !assetConfig.ContributeProject {
 				envList = append(envList, "SHOPWARE_ADMIN_BUILD_ONLY_EXTENSIONS=1", "SHOPWARE_ADMIN_SKIP_SOURCEMAP_GENERATION=1")
@@ -198,11 +198,11 @@ func BuildAssetsForExtensions(ctx context.Context, sources []asset.Source, asset
 		if len(nonCompatibleExtensions) != 0 {
 			// add the storefront itself as plugin into json
 			var basePath string
-			if shopwareRoot == "" {
+			if heycartRoot == "" {
 				basePath = "src/Storefront/"
 			} else {
 				basePath = strings.TrimLeft(
-					strings.Replace(PlatformPath(shopwareRoot, "Storefront", ""), shopwareRoot, "", 1),
+					strings.Replace(PlatformPath(heycartRoot, "Storefront", ""), heycartRoot, "", 1),
 					"/",
 				) + "/"
 			}
@@ -222,11 +222,11 @@ func BuildAssetsForExtensions(ctx context.Context, sources []asset.Source, asset
 				},
 			}
 
-			if err := prepareShopwareForAsset(shopwareRoot, nonCompatibleExtensions); err != nil {
+			if err := prepareHeyCartForAsset(heycartRoot, nonCompatibleExtensions); err != nil {
 				return err
 			}
 
-			storefrontRoot := PlatformPath(shopwareRoot, "Storefront", "Resources/app/storefront")
+			storefrontRoot := PlatformPath(heycartRoot, "Storefront", "Resources/app/storefront")
 
 			if assetConfig.NPMForceInstall || !nodeModulesExists(storefrontRoot) {
 				if err := patchPackageLockToRemoveCanIUsePackage(path.Join(storefrontRoot, "package-lock.json")); err != nil {
@@ -273,7 +273,7 @@ func BuildAssetsForExtensions(ctx context.Context, sources []asset.Source, asset
 
 			envList := []string{
 				"NODE_ENV=production",
-				fmt.Sprintf("PROJECT_ROOT=%s", shopwareRoot),
+				fmt.Sprintf("PROJECT_ROOT=%s", heycartRoot),
 				fmt.Sprintf("STOREFRONT_ROOT=%s", storefrontRoot),
 			}
 
@@ -503,28 +503,28 @@ func getNpmPackage(root string) (NpmPackage, error) {
 	return packageJsonData, nil
 }
 
-func prepareShopwareForAsset(shopwareRoot string, cfgs map[string]ExtensionAssetConfigEntry) error {
-	varFolder := fmt.Sprintf("%s/var", shopwareRoot)
+func prepareHeyCartForAsset(heycartRoot string, cfgs map[string]ExtensionAssetConfigEntry) error {
+	varFolder := fmt.Sprintf("%s/var", heycartRoot)
 	if _, err := os.Stat(varFolder); os.IsNotExist(err) {
 		err := os.Mkdir(varFolder, os.ModePerm)
 		if err != nil {
-			return fmt.Errorf("prepareShopwareForAsset: %w", err)
+			return fmt.Errorf("prepareHeyCartForAsset: %w", err)
 		}
 	}
 
 	pluginJson, err := json.Marshal(cfgs)
 	if err != nil {
-		return fmt.Errorf("prepareShopwareForAsset: %w", err)
+		return fmt.Errorf("prepareHeyCartForAsset: %w", err)
 	}
 
-	err = os.WriteFile(fmt.Sprintf("%s/var/plugins.json", shopwareRoot), pluginJson, os.ModePerm)
+	err = os.WriteFile(fmt.Sprintf("%s/var/plugins.json", heycartRoot), pluginJson, os.ModePerm)
 	if err != nil {
-		return fmt.Errorf("prepareShopwareForAsset: %w", err)
+		return fmt.Errorf("prepareHeyCartForAsset: %w", err)
 	}
 
-	err = os.WriteFile(fmt.Sprintf("%s/var/features.json", shopwareRoot), []byte("{}"), os.ModePerm)
+	err = os.WriteFile(fmt.Sprintf("%s/var/features.json", heycartRoot), []byte("{}"), os.ModePerm)
 	if err != nil {
-		return fmt.Errorf("prepareShopwareForAsset: %w", err)
+		return fmt.Errorf("prepareHeyCartForAsset: %w", err)
 	}
 
 	return nil
@@ -668,7 +668,7 @@ func createConfigFromPath(entryPointName string, extensionRoot string) Extension
 	return cfg
 }
 
-func setupShopwareInTemp(ctx context.Context, minVersion string) (string, error) {
+func setupHeyCartInTemp(ctx context.Context, minVersion string) (string, error) {
 	dir, err := os.MkdirTemp("", "extension")
 	if err != nil {
 		return "", err
@@ -680,9 +680,9 @@ func setupShopwareInTemp(ctx context.Context, minVersion string) (string, error)
 		branch = "trunk"
 	}
 
-	logging.FromContext(ctx).Infof("Cloning shopware with branch: %s into %s", branch, dir)
+	logging.FromContext(ctx).Infof("Cloning heycart with branch: %s into %s", branch, dir)
 
-	gitCheckoutCmd := exec.CommandContext(ctx, "git", "clone", "https://github.com/shopware/shopware.git", "--depth=1", "-b", branch, dir)
+	gitCheckoutCmd := exec.CommandContext(ctx, "git", "clone", "https://github.com/heycart/heycart.git", "--depth=1", "-b", branch, dir)
 	gitCheckoutCmd.Stdout = os.Stdout
 	gitCheckoutCmd.Stderr = os.Stderr
 	err = gitCheckoutCmd.Run()
@@ -701,7 +701,7 @@ func (c ExtensionAssetConfig) Has(name string) bool {
 	return ok
 }
 
-func (c ExtensionAssetConfig) RequiresShopwareRepository() bool {
+func (c ExtensionAssetConfig) RequiresHeyCartRepository() bool {
 	for _, entry := range c {
 		if entry.Administration.EntryFilePath != nil && !entry.EnableESBuildForAdmin {
 			return true

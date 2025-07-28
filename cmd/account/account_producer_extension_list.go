@@ -45,7 +45,7 @@ var accountCompanyProducerExtensionListCmd = &cobra.Command{
 
 			compatible := "No"
 
-			if extension.IsCompatibleWithLatestShopwareVersion {
+			if extension.IsCompatibleWithLatestHeyCartVersion {
 				compatible = "Yes"
 			}
 

@@ -13,7 +13,7 @@ func TestConvertPlugin(t *testing.T) {
 		config: &Config{},
 		Composer: PlatformComposerJson{
 			Extra: platformComposerJsonExtra{
-				ShopwarePluginClass: "FroshTools\\FroshTools",
+				HeyCartPluginClass: "FroshTools\\FroshTools",
 			},
 		},
 	}

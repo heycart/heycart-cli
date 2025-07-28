@@ -50,7 +50,7 @@ var (
 
 var extensionAdminWatchCmd = &cobra.Command{
 	Use:   "admin-watch [path] [host]",
-	Short: "Extremely fast ESBuild powered Shopware 6 Administration watcher",
+	Short: "Extremely fast ESBuild powered HeyCart 6 Administration watcher",
 	Args:  cobra.MinimumNArgs(2),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		var sources []asset.Source
@@ -317,7 +317,7 @@ var extensionAdminWatchCmd = &cobra.Command{
 					}
 				}
 
-				bundleInfo.Bundles["ShopwareCLI"] = adminBundlesInfoAsset{Css: []string{}, Js: []string{browserUrl.String() + "/__internal-admin-proxy/live-reload.js"}}
+				bundleInfo.Bundles["HeyCartCLI"] = adminBundlesInfoAsset{Css: []string{}, Js: []string{browserUrl.String() + "/__internal-admin-proxy/live-reload.js"}}
 
 				newJson, err := json.Marshal(bundleInfo)
 				if err != nil {

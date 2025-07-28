@@ -20,7 +20,7 @@ var projectAutofixComposerCmd = &cobra.Command{
 	Use:   "composer-plugins",
 	Short: "Autofix plugins from custom/plugins to Composer",
 	RunE: func(cmd *cobra.Command, args []string) error {
-		project, err := findClosestShopwareProject()
+		project, err := findClosestHeyCartProject()
 		if err != nil {
 			return err
 		}
@@ -33,7 +33,7 @@ var projectAutofixComposerCmd = &cobra.Command{
 		var token string
 
 		if err := huh.NewInput().
-			Title("Please enter the Shopware Packagist Token").
+			Title("Please enter the HeyCart Packagist Token").
 			Value(&token).
 			Run(); err != nil {
 			return err
@@ -90,7 +90,7 @@ var projectAutofixComposerCmd = &cobra.Command{
 				continue
 			}
 
-			composerInstall = append(composerInstall, fmt.Sprintf("store.shopware.com/%s:%s", strings.ToLower(extName), extVersion.String()))
+			composerInstall = append(composerInstall, fmt.Sprintf("store.heycart.com/%s:%s", strings.ToLower(extName), extVersion.String()))
 			deleteDirectories = append(deleteDirectories, extension.GetPath())
 		}
 
@@ -111,10 +111,10 @@ var projectAutofixComposerCmd = &cobra.Command{
 		fmt.Print(greenStyle.Render("bin/console plugin:refresh"))
 		fmt.Println(" after deleting the directories.")
 
-		if !rootComposerJson.Repositories.HasRepository("https://packages.shopware.com") {
+		if !rootComposerJson.Repositories.HasRepository("https://packages.heycart.com") {
 			rootComposerJson.Repositories = append(rootComposerJson.Repositories, packagist.ComposerJsonRepository{
 				Type: "composer",
-				URL:  "https://packages.shopware.com",
+				URL:  "https://packages.heycart.com",
 			})
 		}
 
@@ -123,7 +123,7 @@ var projectAutofixComposerCmd = &cobra.Command{
 			return err
 		}
 
-		auth.BearerAuth["packages.shopware.com"] = token
+		auth.BearerAuth["packages.heycart.com"] = token
 
 		if err := auth.Save(); err != nil {
 			return err

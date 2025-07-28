@@ -14,13 +14,13 @@ import (
 
 func findPHPWasmFile(ctx context.Context, phpVersion string) ([]byte, error) {
 	expectedFile := "php-" + phpVersion + ".wasm"
-	expectedPathLocation := path.Join(system.GetShopwareCliCacheDir(), "wasm", "php", expectedFile)
+	expectedPathLocation := path.Join(system.GetHeyCartCliCacheDir(), "wasm", "php", expectedFile)
 
 	if _, err := os.Stat(expectedPathLocation); err == nil {
 		return os.ReadFile(expectedPathLocation)
 	}
 
-	downloadUrl := "https://github.com/shopwareLabs/php-cli-wasm-binaries/releases/download/1.0.0/" + expectedFile
+	downloadUrl := "https://github.com/heycartLabs/php-cli-wasm-binaries/releases/download/1.0.0/" + expectedFile
 
 	r, err := http.NewRequestWithContext(ctx, http.MethodGet, downloadUrl, nil)
 	if err != nil {

@@ -15,7 +15,7 @@ import (
 
 var projectDebug = &cobra.Command{
 	Use:   "debug",
-	Short: "Shows detected Shopware version and detected extensions for further debugging",
+	Short: "Shows detected HeyCart version and detected extensions for further debugging",
 	Args:  cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		var err error
@@ -29,7 +29,7 @@ var projectDebug = &cobra.Command{
 			return err
 		}
 
-		shopwareConstraint, err := extension.GetShopwareProjectConstraint(args[0])
+		heycartConstraint, err := extension.GetHeyCartProjectConstraint(args[0])
 		if err != nil {
 			return err
 		}
@@ -39,7 +39,7 @@ var projectDebug = &cobra.Command{
 		} else {
 			fmt.Printf("Found config: Yes\n")
 		}
-		fmt.Printf("Detected following Shopware version: %s\n", shopwareConstraint.String())
+		fmt.Printf("Detected following HeyCart version: %s\n", heycartConstraint.String())
 
 		sources := extension.FindAssetSourcesOfProject(logging.DisableLogger(cmd.Context()), args[0], shopCfg)
 

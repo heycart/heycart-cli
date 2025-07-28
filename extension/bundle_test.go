@@ -11,7 +11,7 @@ import (
 func TestCreateBundleEmptyFolder(t *testing.T) {
 	dir := t.TempDir()
 
-	bundle, err := newShopwareBundle(dir)
+	bundle, err := newHeyCartBundle(dir)
 	assert.Error(t, err)
 	assert.Nil(t, bundle)
 }
@@ -21,15 +21,15 @@ func TestCreateBundleInvalidComposerType(t *testing.T) {
 
 	// Create composer.json
 	composer := []byte(`{
-		"name": "shopware/invalid",
+		"name": "heycart/invalid",
 		"type": "invalid"
 	}
 	`)
 	_ = os.WriteFile(path.Join(dir, "composer.json"), composer, 0o644)
 
-	bundle, err := newShopwareBundle(dir)
+	bundle, err := newHeyCartBundle(dir)
 	assert.Error(t, err)
-	assert.Contains(t, err.Error(), "composer.json type is not shopware-bundle")
+	assert.Contains(t, err.Error(), "composer.json type is not heycart-bundle")
 	assert.Nil(t, bundle)
 }
 
@@ -38,15 +38,15 @@ func TestCreateBundleMissingName(t *testing.T) {
 
 	// Create composer.json
 	composer := []byte(`{
-		"name": "shopware/invalid",
-		"type": "shopware-bundle"
+		"name": "heycart/invalid",
+		"type": "heycart-bundle"
 	}
 	`)
 	_ = os.WriteFile(path.Join(dir, "composer.json"), composer, 0o644)
 
-	bundle, err := newShopwareBundle(dir)
+	bundle, err := newHeyCartBundle(dir)
 	assert.Error(t, err)
-	assert.Contains(t, err.Error(), "composer.json does not contain shopware-bundle-name")
+	assert.Contains(t, err.Error(), "composer.json does not contain heycart-bundle-name")
 	assert.Nil(t, bundle)
 }
 
@@ -55,11 +55,11 @@ func TestCreateBundle(t *testing.T) {
 
 	// Create composer.json
 	composer := []byte(`{
-		"name": "shopware/invalid",
+		"name": "heycart/invalid",
 		"version": "1.0.0",
-		"type": "shopware-bundle",
+		"type": "heycart-bundle",
 		"extra": {
-			"shopware-bundle-name": "TestBundle"
+			"heycart-bundle-name": "TestBundle"
 		},
 		"autoload": {
 			"psr-4": {
@@ -70,7 +70,7 @@ func TestCreateBundle(t *testing.T) {
 	`)
 	_ = os.WriteFile(path.Join(dir, "composer.json"), composer, 0o644)
 
-	bundle, err := newShopwareBundle(dir)
+	bundle, err := newHeyCartBundle(dir)
 	assert.NoError(t, err)
 
 	name, err := bundle.GetName()
@@ -81,7 +81,7 @@ func TestCreateBundle(t *testing.T) {
 	assert.Equal(t, dir, bundle.GetPath())
 	assert.Equal(t, path.Join(dir, "src", "Resources"), bundle.GetResourcesDir())
 	assert.Equal(t, path.Join(dir, "src", "Resources"), bundle.GetResourcesDirs()[0])
-	assert.Equal(t, TypeShopwareBundle, bundle.GetType())
+	assert.Equal(t, TypeHeyCartBundle, bundle.GetType())
 
 	_, err = bundle.GetChangelog()
 	// changelog is missing

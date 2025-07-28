@@ -32,7 +32,7 @@ const (
 
 var projectDatabaseDumpCmd = &cobra.Command{
 	Use:   "dump",
-	Short: "Dumps the Shopware database",
+	Short: "Dumps the HeyCart database",
 	RunE: func(cmd *cobra.Command, _ []string) error {
 		mysqlConfig, err := assembleConnectionURI(cmd)
 		if err != nil {
@@ -242,10 +242,10 @@ func assembleConnectionURI(cmd *cobra.Command) (*mysql.Config, error) {
 		User:                 "root",
 		Passwd:               "root",
 		Addr:                 "127.0.0.1:3306",
-		DBName:               "shopware",
+		DBName:               "heycart",
 	}
 
-	if projectRoot, err := findClosestShopwareProject(); err == nil {
+	if projectRoot, err := findClosestHeyCartProject(); err == nil {
 		if err := loadDatabaseURLIntoConnection(cmd.Context(), projectRoot, cfg); err != nil {
 			return nil, err
 		}

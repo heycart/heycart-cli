@@ -12,7 +12,7 @@ import (
 )
 
 func getWazeroRuntime(ctx context.Context) (wazero.Runtime, error) {
-	wazeroCacheDir := path.Join(system.GetShopwareCliCacheDir(), "wasm", "cache")
+	wazeroCacheDir := path.Join(system.GetHeyCartCliCacheDir(), "wasm", "cache")
 
 	if _, err := os.Stat(wazeroCacheDir); os.IsNotExist(err) {
 		if err := os.MkdirAll(wazeroCacheDir, os.ModePerm); err != nil {

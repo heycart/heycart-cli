@@ -87,9 +87,9 @@ func (a App) GetExtensionConfig() *Config {
 	return a.config
 }
 
-func (a App) GetShopwareVersionConstraint() (*version.Constraints, error) {
-	if a.config != nil && a.config.Build.ShopwareVersionConstraint != "" {
-		v, err := version.NewConstraint(a.config.Build.ShopwareVersionConstraint)
+func (a App) GetHeyCartVersionConstraint() (*version.Constraints, error) {
+	if a.config != nil && a.config.Build.HeyCartVersionConstraint != "" {
+		v, err := version.NewConstraint(a.config.Build.HeyCartVersionConstraint)
 		if err != nil {
 			return nil, err
 		}
@@ -212,7 +212,7 @@ func (a App) Validate(_ context.Context, check validation.Check) {
 		check.AddResult(validation.CheckResult{
 			Path:       "manifest.xml",
 			Identifier: "metadata.setup",
-			Message:    "The xml element setup:secret is only for local development, please remove it. You can find your generated app secret on your extension detail page in the master data section. For more information see https://docs.shopware.com/en/shopware-platform-dev-en/app-system-guide/setup#authorisation",
+			Message:    "The xml element setup:secret is only for local development, please remove it. You can find your generated app secret on your extension detail page in the master data section. For more information see https://docs.heycart.com/en/heycart-platform-dev-en/app-system-guide/setup#authorisation",
 			Severity:   validation.SeverityError,
 		})
 	}

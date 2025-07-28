@@ -3,7 +3,7 @@ import pluginJs from "@eslint/js";
 import tseslint from "typescript-eslint";
 import pluginVue from "eslint-plugin-vue";
 import pluginVueA11y from "eslint-plugin-vuejs-accessibility";
-import adminRules from "@shopware-ag/admin-eslint-rules";
+import adminRules from "@heycart-ag/admin-eslint-rules";
 import pluginInclusiveLanguage from "eslint-plugin-inclusive-language";
 import eslintConfigPrettier from "eslint-config-prettier";
 
@@ -13,7 +13,7 @@ export default [
 		languageOptions: {
 			globals: {
 				...globals.browser,
-				Shopware: true,
+				HeyCart: true,
 				VueJS: true,
 			},
 		},

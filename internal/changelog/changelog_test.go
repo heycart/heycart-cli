@@ -17,13 +17,13 @@ func TestGenerateWithoutConfig(t *testing.T) {
 	}
 
 	changelog, err := renderChangelog(commits, Config{
-		VCSURL:   "https://github.com/FriendsOfShopware/FroshTools/commit",
+		VCSURL:   "https://github.com/FriendsOfHeyCart/FroshTools/commit",
 		Template: defaultChangelogTpl,
 	})
 
 	assert.NoError(t, err)
 
-	assert.Equal(t, "- [feat: add new feature](https://github.com/FriendsOfShopware/FroshTools/commit/1234567890)", changelog)
+	assert.Equal(t, "- [feat: add new feature](https://github.com/FriendsOfHeyCart/FroshTools/commit/1234567890)", changelog)
 }
 
 func TestTicketParsing(t *testing.T) {
@@ -38,13 +38,13 @@ func TestTicketParsing(t *testing.T) {
 		Variables: map[string]string{
 			"ticket": "^(NEXT-[0-9]+)",
 		},
-		Template: "{{range .Commits}}- [{{ .Message }}](https://issues.shopware.com/issues/{{ .Variables.ticket }}){{end}}",
+		Template: "{{range .Commits}}- [{{ .Message }}](https://issues.heycart.com/issues/{{ .Variables.ticket }}){{end}}",
 	}
 
 	changelog, err := renderChangelog(commits, cfg)
 
 	assert.NoError(t, err)
-	assert.Equal(t, "- [NEXT-1234 - Fooo](https://issues.shopware.com/issues/NEXT-1234)", changelog)
+	assert.Equal(t, "- [NEXT-1234 - Fooo](https://issues.heycart.com/issues/NEXT-1234)", changelog)
 }
 
 func TestIncludeFilters(t *testing.T) {

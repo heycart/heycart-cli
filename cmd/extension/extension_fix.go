@@ -44,7 +44,7 @@ var extensionFixCmd = &cobra.Command{
 			return err
 		}
 
-		logging.FromContext(cmd.Context()).Debugf("Running fixes for Shopware version: %s", toolCfg.MinShopwareVersion)
+		logging.FromContext(cmd.Context()).Debugf("Running fixes for HeyCart version: %s", toolCfg.MinHeyCartVersion)
 
 		var gr errgroup.Group
 

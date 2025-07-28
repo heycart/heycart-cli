@@ -13,7 +13,7 @@ func ToKebabCase(str string) string {
 		return "-" + strings.ToLower(match)
 	})
 
-	// See https://github.com/shopware/shopware/blob/240386d/src/Core/Framework/Plugin/BundleConfigGenerator.php#L73
+	// See https://github.com/heycart/heycart/blob/240386d/src/Core/Framework/Plugin/BundleConfigGenerator.php#L73
 	converted = strings.ReplaceAll(converted, "_", "-")
 
 	return strings.TrimPrefix(converted, "-")

@@ -35,7 +35,7 @@ func (b ButtonFixer) Check(nodes []html.Node) []validation.CheckResult {
 
 func (b ButtonFixer) Supports(v *version.Version) bool {
 	// ...existing code...
-	return twiglinter.Shopware67Constraint.Check(v)
+	return twiglinter.HeyCart67Constraint.Check(v)
 }
 
 func (b ButtonFixer) Fix(nodes []html.Node) error {

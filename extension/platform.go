@@ -110,20 +110,20 @@ type PlatformComposerJson struct {
 }
 
 type platformComposerJsonExtra struct {
-	ShopwarePluginClass string            `json:"shopware-plugin-class"`
-	Label               map[string]string `json:"label"`
-	Description         map[string]string `json:"description"`
-	ManufacturerLink    map[string]string `json:"manufacturerLink"`
-	SupportLink         map[string]string `json:"supportLink"`
-	PluginIcon          string            `json:"plugin-icon"`
+	HeyCartPluginClass string            `json:"heycart-plugin-class"`
+	Label              map[string]string `json:"label"`
+	Description        map[string]string `json:"description"`
+	ManufacturerLink   map[string]string `json:"manufacturerLink"`
+	SupportLink        map[string]string `json:"supportLink"`
+	PluginIcon         string            `json:"plugin-icon"`
 }
 
 func (p PlatformPlugin) GetName() (string, error) {
-	if p.Composer.Extra.ShopwarePluginClass == "" {
+	if p.Composer.Extra.HeyCartPluginClass == "" {
 		return "", fmt.Errorf("extension name is empty")
 	}
 
-	parts := strings.Split(p.Composer.Extra.ShopwarePluginClass, "\\")
+	parts := strings.Split(p.Composer.Extra.HeyCartPluginClass, "\\")
 
 	return parts[len(parts)-1], nil
 }
@@ -136,9 +136,9 @@ func (p PlatformPlugin) GetExtensionConfig() *Config {
 	return p.config
 }
 
-func (p PlatformPlugin) GetShopwareVersionConstraint() (*version.Constraints, error) {
-	if p.config != nil && p.config.Build.ShopwareVersionConstraint != "" {
-		constraint, err := version.NewConstraint(p.config.Build.ShopwareVersionConstraint)
+func (p PlatformPlugin) GetHeyCartVersionConstraint() (*version.Constraints, error) {
+	if p.config != nil && p.config.Build.HeyCartVersionConstraint != "" {
+		constraint, err := version.NewConstraint(p.config.Build.HeyCartVersionConstraint)
 		if err != nil {
 			return nil, err
 		}
@@ -146,18 +146,18 @@ func (p PlatformPlugin) GetShopwareVersionConstraint() (*version.Constraints, er
 		return &constraint, nil
 	}
 
-	shopwareConstraintString, ok := p.Composer.Require["shopware/core"]
+	heycartConstraintString, ok := p.Composer.Require["heycart/core"]
 
 	if !ok {
-		return nil, fmt.Errorf("require.shopware/core is required")
+		return nil, fmt.Errorf("require.heycart/core is required")
 	}
 
-	shopwareConstraint, err := version.NewConstraint(shopwareConstraintString)
+	heycartConstraint, err := version.NewConstraint(heycartConstraintString)
 	if err != nil {
 		return nil, err
 	}
 
-	return &shopwareConstraint, err
+	return &heycartConstraint, err
 }
 
 func (PlatformPlugin) GetType() string {
@@ -225,7 +225,7 @@ func (p PlatformPlugin) Validate(c context.Context, check validation.Check) {
 		check.AddResult(validation.CheckResult{
 			Path:       "composer.json",
 			Identifier: "metadata.type",
-			Message:    "The composer type must be shopware-platform-plugin",
+			Message:    "The composer type must be heycart-platform-plugin",
 			Severity:   validation.SeverityError,
 		})
 	}
@@ -274,13 +274,13 @@ func (p PlatformPlugin) Validate(c context.Context, check validation.Check) {
 			Severity:   validation.SeverityError,
 		})
 	} else {
-		_, exists := p.Composer.Require["shopware/core"]
+		_, exists := p.Composer.Require["heycart/core"]
 
 		if !exists {
 			check.AddResult(validation.CheckResult{
 				Path:       "composer.json",
 				Identifier: "metadata.require",
-				Message:    "You need to require \"shopware/core\" package",
+				Message:    "You need to require \"heycart/core\" package",
 				Severity:   validation.SeverityError,
 			})
 		}
@@ -351,12 +351,12 @@ func (p PlatformPlugin) Validate(c context.Context, check validation.Check) {
 }
 
 func validatePHPFiles(c context.Context, ext Extension, check validation.Check) {
-	constraint, err := ext.GetShopwareVersionConstraint()
+	constraint, err := ext.GetHeyCartVersionConstraint()
 	if err != nil {
 		check.AddResult(validation.CheckResult{
 			Path:       "composer.json",
 			Identifier: "php.linter",
-			Message:    fmt.Sprintf("Could not parse shopware version constraint: %s", err.Error()),
+			Message:    fmt.Sprintf("Could not parse heycart version constraint: %s", err.Error()),
 			Severity:   validation.SeverityError,
 		})
 		return
@@ -403,7 +403,7 @@ func validatePHPFiles(c context.Context, ext Extension, check validation.Check) 
 }
 
 func GetPhpVersion(ctx context.Context, constraint *version.Constraints) (string, error) {
-	r, _ := http.NewRequestWithContext(context.Background(), http.MethodGet, "https://raw.githubusercontent.com/FriendsOfShopware/shopware-static-data/main/data/php-version.json", http.NoBody)
+	r, _ := http.NewRequestWithContext(context.Background(), http.MethodGet, "https://raw.githubusercontent.com/FriendsOfHeyCart/heycart-static-data/main/data/php-version.json", http.NoBody)
 
 	resp, err := http.DefaultClient.Do(r)
 	if err != nil {
@@ -416,23 +416,23 @@ func GetPhpVersion(ctx context.Context, constraint *version.Constraints) (string
 		}
 	}()
 
-	var shopwareToPHPVersion map[string]string
+	var heycartToPHPVersion map[string]string
 
-	err = json.NewDecoder(resp.Body).Decode(&shopwareToPHPVersion)
+	err = json.NewDecoder(resp.Body).Decode(&heycartToPHPVersion)
 	if err != nil {
 		return "", err
 	}
 
-	for shopwareVersion, phpVersion := range shopwareToPHPVersion {
-		shopwareVersionConstraint, err := version.NewVersion(shopwareVersion)
+	for heycartVersion, phpVersion := range heycartToPHPVersion {
+		heycartVersionConstraint, err := version.NewVersion(heycartVersion)
 		if err != nil {
 			continue
 		}
 
-		if constraint.Check(shopwareVersionConstraint) {
+		if constraint.Check(heycartVersionConstraint) {
 			return phpVersion, nil
 		}
 	}
 
-	return "", errors.New("could not find php version for shopware version")
+	return "", errors.New("could not find php version for heycart version")
 }

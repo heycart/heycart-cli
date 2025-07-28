@@ -24,7 +24,7 @@ func SetupTools(ctx context.Context, currentVersion string) error {
 		return nil
 	}
 
-	cacheDir := system.GetShopwareCliCacheDir()
+	cacheDir := system.GetHeyCartCliCacheDir()
 	toolsDir := path.Join(cacheDir, "tools", currentVersion)
 
 	if _, err := os.Stat(toolsDir); err == nil {

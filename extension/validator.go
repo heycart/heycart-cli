@@ -100,7 +100,7 @@ func RunValidation(ctx context.Context, ext Extension, check validation.Check) {
 func runDefaultValidate(ext Extension, check validation.Check) {
 	_, versionErr := ext.GetVersion()
 	name, nameErr := ext.GetName()
-	_, shopwareVersionErr := ext.GetShopwareVersionConstraint()
+	_, heycartVersionErr := ext.GetHeyCartVersionConstraint()
 
 	rootFile := "composer.json"
 
@@ -108,8 +108,8 @@ func runDefaultValidate(ext Extension, check validation.Check) {
 		rootFile = "manifest.xml"
 	}
 
-	// Skip version validation for ShopwareBundle
-	if versionErr != nil && ext.GetType() != TypeShopwareBundle {
+	// Skip version validation for HeyCartBundle
+	if versionErr != nil && ext.GetType() != TypeHeyCartBundle {
 		check.AddResult(validation.CheckResult{
 			Path:       rootFile,
 			Identifier: "metadata.version",
@@ -127,11 +127,11 @@ func runDefaultValidate(ext Extension, check validation.Check) {
 		})
 	}
 
-	if shopwareVersionErr != nil {
+	if heycartVersionErr != nil {
 		check.AddResult(validation.CheckResult{
 			Path:       rootFile,
-			Identifier: "metadata.shopware_version",
-			Message:    shopwareVersionErr.Error(),
+			Identifier: "metadata.heycart_version",
+			Message:    heycartVersionErr.Error(),
 			Severity:   validation.SeverityError,
 		})
 	}
@@ -251,8 +251,8 @@ func runDefaultValidate(ext Extension, check validation.Check) {
 		})
 	}
 
-	// Skip description validation for ShopwareBundle
-	if ext.GetType() != TypeShopwareBundle {
+	// Skip description validation for HeyCartBundle
+	if ext.GetType() != TypeHeyCartBundle {
 		if len([]rune(metaData.Description.German)) == 0 {
 			check.AddResult(validation.CheckResult{
 				Path:       rootFile,

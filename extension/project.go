@@ -19,7 +19,7 @@ import (
 	"github.com/heycart/heycart-cli/shop"
 )
 
-func GetShopwareProjectConstraint(project string) (*version.Constraints, error) {
+func GetHeyCartProjectConstraint(project string) (*version.Constraints, error) {
 	composerJson, err := os.ReadFile(path.Join(project, "composer.json"))
 	if err != nil {
 		return nil, fmt.Errorf("could not read composer.json: %w", err)
@@ -32,14 +32,14 @@ func GetShopwareProjectConstraint(project string) (*version.Constraints, error) 
 		return nil, fmt.Errorf("could not parse composer.json: %w", err)
 	}
 
-	constraint, ok := composer.Require["shopware/core"]
+	constraint, ok := composer.Require["heycart/core"]
 
 	if !ok {
 		if v, err := getProjectConstraintFromKernel(project); err == nil {
 			return v, nil
 		}
 
-		return nil, fmt.Errorf("missing shopware/core requirement in composer.json")
+		return nil, fmt.Errorf("missing heycart/core requirement in composer.json")
 	}
 
 	c, err := version.NewConstraint(constraint)
@@ -55,7 +55,7 @@ func GetShopwareProjectConstraint(project string) (*version.Constraints, error) 
 			}
 
 			for _, pkg := range lock.Packages {
-				if pkg.Name == "shopware/core" {
+				if pkg.Name == "heycart/core" {
 					v, err := version.NewConstraint(pkg.Version)
 					if err != nil {
 						return getProjectConstraintFromKernel(project)
@@ -79,13 +79,13 @@ func getProjectConstraintFromKernel(project string) (*version.Constraints, error
 
 	kernel, err := os.ReadFile(kernelPath)
 	if err != nil {
-		return nil, fmt.Errorf("could not determine shopware version")
+		return nil, fmt.Errorf("could not determine heycart version")
 	}
 
 	matches := kernelFallbackRegExp.FindSubmatch(kernel)
 
 	if len(matches) < 2 {
-		return nil, fmt.Errorf("could not determine shopware version")
+		return nil, fmt.Errorf("could not determine heycart version")
 	}
 
 	v, err := version.NewConstraint(fmt.Sprintf("~%s.0", string(matches[1])))
@@ -277,7 +277,7 @@ func addExtensionsByComposer(project string) []Extension {
 			case ComposerTypeApp:
 				ext.(*App).manifest.Meta.Version = pkg.Version
 			case ComposerTypeBundle:
-				ext.(*ShopwareBundle).Composer.Version = pkg.Version
+				ext.(*HeyCartBundle).Composer.Version = pkg.Version
 			}
 
 			list = append(list, ext)
@@ -337,10 +337,10 @@ type composerLock struct {
 type rootComposerJson struct {
 	Require map[string]string `json:"require"`
 	Extra   struct {
-		Bundles map[string]rootShopwareBundle `json:"shopware-bundles"`
+		Bundles map[string]rootHeyCartBundle `json:"heycart-bundles"`
 	}
 }
 
-type rootShopwareBundle struct {
+type rootHeyCartBundle struct {
 	Name string `json:"name"`
 }

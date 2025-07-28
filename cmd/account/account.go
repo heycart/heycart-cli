@@ -9,7 +9,7 @@ import (
 
 var accountRootCmd = &cobra.Command{
 	Use:   "account",
-	Short: "Manage your Shopware Account",
+	Short: "Manage your HeyCart Account",
 }
 
 type ServiceContainer struct {

@@ -32,7 +32,7 @@ func (s SwitchFixer) Check(nodes []html.Node) []validation.CheckResult {
 }
 
 func (s SwitchFixer) Supports(v *version.Version) bool {
-	return twiglinter.Shopware67Constraint.Check(v)
+	return twiglinter.HeyCart67Constraint.Check(v)
 }
 
 func (s SwitchFixer) Fix(nodes []html.Node) error {

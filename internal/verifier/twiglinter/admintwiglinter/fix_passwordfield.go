@@ -32,7 +32,7 @@ func (p PasswordFieldFixer) Check(nodes []html.Node) []validation.CheckResult {
 }
 
 func (p PasswordFieldFixer) Supports(v *version.Version) bool {
-	return twiglinter.Shopware67Constraint.Check(v)
+	return twiglinter.HeyCart67Constraint.Check(v)
 }
 
 func (p PasswordFieldFixer) Fix(nodes []html.Node) error {

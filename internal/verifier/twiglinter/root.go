@@ -7,7 +7,7 @@ import (
 	"github.com/heycart/heycart-cli/internal/validation"
 )
 
-var Shopware67Constraint = version.MustConstraints(version.NewConstraint(">=6.7.0"))
+var HeyCart67Constraint = version.MustConstraints(version.NewConstraint(">=6.7.0"))
 
 const TwigExtension = ".twig"
 

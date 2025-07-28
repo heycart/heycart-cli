@@ -32,7 +32,7 @@ func (d DatepickerFixer) Check(nodes []html.Node) []validation.CheckResult {
 }
 
 func (d DatepickerFixer) Supports(v *version.Version) bool {
-	return twiglinter.Shopware67Constraint.Check(v)
+	return twiglinter.HeyCart67Constraint.Check(v)
 }
 
 func (d DatepickerFixer) Fix(nodes []html.Node) error {

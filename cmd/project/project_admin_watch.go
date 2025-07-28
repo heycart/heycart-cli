@@ -14,7 +14,7 @@ import (
 
 var projectAdminWatchCmd = &cobra.Command{
 	Use:     "admin-watch [path]",
-	Short:   "Starts the Shopware Admin Watcher",
+	Short:   "Starts the HeyCart Admin Watcher",
 	Aliases: []string{"watch-admin"},
 	RunE: func(cmd *cobra.Command, args []string) error {
 		var projectRoot string
@@ -22,7 +22,7 @@ var projectAdminWatchCmd = &cobra.Command{
 
 		if len(args) == 1 {
 			projectRoot = args[0]
-		} else if projectRoot, err = findClosestShopwareProject(); err != nil {
+		} else if projectRoot, err = findClosestHeyCartProject(); err != nil {
 			return err
 		}
 

@@ -22,7 +22,7 @@ func TestPackageResponseHasPackage(t *testing.T) {
 			name:        "package exists",
 			packageName: "SwagExtensionStore",
 			responseData: map[string]map[string]PackageVersion{
-				"store.shopware.com/swagextensionstore": {
+				"store.heycart.com/swagextensionstore": {
 					"1.0.0": {
 						Version: "1.0.0",
 					},
@@ -34,7 +34,7 @@ func TestPackageResponseHasPackage(t *testing.T) {
 			name:        "package exists with different case",
 			packageName: "SWAGEXTENSIONSTORE",
 			responseData: map[string]map[string]PackageVersion{
-				"store.shopware.com/swagextensionstore": {
+				"store.heycart.com/swagextensionstore": {
 					"1.0.0": {
 						Version: "1.0.0",
 					},
@@ -46,7 +46,7 @@ func TestPackageResponseHasPackage(t *testing.T) {
 			name:        "package does not exist",
 			packageName: "NonExistentPackage",
 			responseData: map[string]map[string]PackageVersion{
-				"store.shopware.com/swagextensionstore": {
+				"store.heycart.com/swagextensionstore": {
 					"1.0.0": {
 						Version: "1.0.0",
 					},
@@ -84,13 +84,13 @@ func TestGetPackages(t *testing.T) {
 		// Setup mock server
 		server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			// Check request
-			assert.Equal(t, "Shopware CLI", r.Header.Get("User-Agent"))
+			assert.Equal(t, "HeyCart CLI", r.Header.Get("User-Agent"))
 			assert.Equal(t, "Bearer test-token", r.Header.Get("Authorization"))
 
 			// Return successful response
 			response := PackageResponse{
 				Packages: map[string]map[string]PackageVersion{
-					"store.shopware.com/swagextensionstore": {
+					"store.heycart.com/swagextensionstore": {
 						"1.0.0": {
 							Version: "1.0.0",
 							Replace: map[string]string{
@@ -120,7 +120,7 @@ func TestGetPackages(t *testing.T) {
 		assert.NoError(t, err)
 		assert.NotNil(t, packages)
 		assert.True(t, packages.HasPackage("SwagExtensionStore"))
-		assert.Equal(t, "1.0.0", packages.Packages["store.shopware.com/swagextensionstore"]["1.0.0"].Version)
+		assert.Equal(t, "1.0.0", packages.Packages["store.heycart.com/swagextensionstore"]["1.0.0"].Version)
 	})
 
 	t.Run("unauthorized request", func(t *testing.T) {

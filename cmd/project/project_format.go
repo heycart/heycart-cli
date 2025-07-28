@@ -26,7 +26,7 @@ var projectFormatCmd = &cobra.Command{
 		if len(args) > 0 {
 			projectPath = args[0]
 		} else {
-			projectPath, err = findClosestShopwareProject()
+			projectPath, err = findClosestHeyCartProject()
 			if err != nil {
 				return err
 			}

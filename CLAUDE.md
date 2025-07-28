@@ -20,13 +20,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Architecture Overview
 
 ### Core Command Groups
-1. **`account/`** - Shopware Account management (login, companies, extensions)
+1. **`account/`** - HeyCart Account management (login, companies, extensions)
 2. **`extension/`** - Extension development tools (build, validate, AI assistance)
-3. **`project/`** - Shopware project management (creation, configuration, deployment)
+3. **`project/`** - HeyCart project management (creation, configuration, deployment)
 
 ### Key Internal Packages
 - **`internal/verifier/`** - Code quality tools (PHPStan, ESLint, Twig linting)
-- **`internal/account-api/`** - Shopware Account API integration
+- **`internal/account-api/`** - HeyCart Account API integration
 - **`internal/system/`** - System utilities (PHP/Node detection, filesystem)
 - **`internal/packagist/`** - Composer/Packagist integration
 - **`internal/llm/`** - AI integration (OpenAI, Gemini, OpenRouter)
@@ -37,16 +37,16 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ### Extension System
 The CLI supports three extension types:
-- **Platform Plugins**: Standard Shopware 6 plugins with `composer.json`
-- **Shopware Apps**: App system extensions with `manifest.xml`
-- **Shopware Bundles**: Custom bundle implementations
+- **Platform Plugins**: Standard HeyCart 6 plugins with `composer.json`
+- **HeyCart Apps**: App system extensions with `manifest.xml`
+- **HeyCart Bundles**: Custom bundle implementations
 
 Extension detection is automatic based on file presence. Each type has specific build, validation, and packaging rules.
 
 ### Configuration Files
 - **`.heycart-cli.yaml`** - Global CLI configuration
-- **`.shopware-extension.yml`** - Extension-specific settings (schema: `extension/shopware-extension-schema.json`)
-- **`.shopware-project.yml`** - Project-specific settings (schema: `shop/shopware-project-schema.json`)
+- **`.heycart-extension.yml`** - Extension-specific settings (schema: `extension/heycart-extension-schema.json`)
+- **`.heycart-project.yml`** - Project-specific settings (schema: `shop/heycart-project-schema.json`)
 
 ## Development Patterns
 

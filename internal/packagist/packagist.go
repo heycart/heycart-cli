@@ -15,7 +15,7 @@ type PackageResponse struct {
 }
 
 func (p *PackageResponse) HasPackage(name string) bool {
-	expectedName := fmt.Sprintf("store.shopware.com/%s", strings.ToLower(name))
+	expectedName := fmt.Sprintf("store.heycart.com/%s", strings.ToLower(name))
 
 	_, ok := p.Packages[expectedName]
 
@@ -28,12 +28,12 @@ type PackageVersion struct {
 }
 
 func GetPackages(ctx context.Context, token string) (*PackageResponse, error) {
-	req, err := http.NewRequestWithContext(ctx, http.MethodGet, "https://packages.shopware.com/packages.json", nil)
+	req, err := http.NewRequestWithContext(ctx, http.MethodGet, "https://packages.heycart.com/packages.json", nil)
 	if err != nil {
 		return nil, err
 	}
 
-	req.Header.Set("User-Agent", "Shopware CLI")
+	req.Header.Set("User-Agent", "HeyCart CLI")
 	req.Header.Set("Authorization", fmt.Sprintf("Bearer %s", token))
 
 	resp, err := http.DefaultClient.Do(req)

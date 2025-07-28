@@ -19,7 +19,7 @@ import (
 
 type Config struct {
 	AdditionalConfigs []string `yaml:"include,omitempty"`
-	// The URL of the Shopware instance
+	// The URL of the HeyCart instance
 	URL              string            `yaml:"url"`
 	Build            *ConfigBuild      `yaml:"build,omitempty"`
 	AdminApi         *ConfigAdminApi   `yaml:"admin_api,omitempty"`
@@ -42,7 +42,7 @@ func (c *Config) IsAdminAPIConfigured() bool {
 type ConfigBuild struct {
 	// When enabled, the assets will not be copied to the public folder
 	DisableAssetCopy bool `yaml:"disable_asset_copy,omitempty"`
-	// When enabled, the assets of extensions will be removed from the extension public folder. (Requires Shopware 6.5.2.0)
+	// When enabled, the assets of extensions will be removed from the extension public folder. (Requires HeyCart 6.5.2.0)
 	RemoveExtensionAssets bool `yaml:"remove_extension_assets,omitempty"`
 	// When enabled, the extensions source code will be keep in the final build
 	KeepExtensionSource bool `yaml:"keep_extension_source,omitempty"`
@@ -58,7 +58,7 @@ type ConfigBuild struct {
 	DisableStorefrontBuild bool `yaml:"disable_storefront_build,omitempty"`
 	// Extensions to force build for, even if they have compiled files
 	ForceExtensionBuild []ConfigBuildExtension `yaml:"force_extension_build,omitempty"`
-	// When enabled, the shopware admin will be built
+	// When enabled, the heycart admin will be built
 	ForceAdminBuild bool `yaml:"force_admin_build,omitempty"`
 	// Keep following node_modules in the final build
 	KeepNodeModules []string `yaml:"keep_node_modules,omitempty"`
@@ -370,12 +370,12 @@ func NewUuid() string {
 func DefaultConfigFileName() string {
 	currentDir, err := os.Getwd()
 	if err != nil {
-		return ".shopware-project.yml"
+		return ".heycart-project.yml"
 	}
 
-	if _, err := os.Stat(path.Join(currentDir, ".shopware-project.yaml")); err == nil {
-		return ".shopware-project.yaml"
+	if _, err := os.Stat(path.Join(currentDir, ".heycart-project.yaml")); err == nil {
+		return ".heycart-project.yaml"
 	}
 
-	return ".shopware-project.yml"
+	return ".heycart-project.yml"
 }

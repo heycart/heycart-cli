@@ -30,7 +30,7 @@ func (s SkeletonBarFixer) Check(nodes []html.Node) []validation.CheckResult {
 }
 
 func (s SkeletonBarFixer) Supports(v *version.Version) bool {
-	return twiglinter.Shopware67Constraint.Check(v)
+	return twiglinter.HeyCart67Constraint.Check(v)
 }
 
 func (s SkeletonBarFixer) Fix(nodes []html.Node) error {

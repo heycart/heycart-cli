@@ -20,7 +20,7 @@ import (
 
 const storefrontBundleName = "Storefront"
 
-func findClosestShopwareProject() (string, error) {
+func findClosestHeyCartProject() (string, error) {
 	projectRoot := os.Getenv("PROJECT_ROOT")
 
 	if projectRoot != "" {
@@ -46,7 +46,7 @@ func findClosestShopwareProject() (string, error) {
 				}
 				contentString := string(content)
 
-				if strings.Contains(contentString, "shopware/core") {
+				if strings.Contains(contentString, "heycart/core") {
 					if _, err := os.Stat(fmt.Sprintf("%s/bin/console", currentDir)); err == nil {
 						return currentDir, nil
 					}
@@ -61,7 +61,7 @@ func findClosestShopwareProject() (string, error) {
 		}
 	}
 
-	return "", fmt.Errorf("cannot find Shopware project in current directory")
+	return "", fmt.Errorf("cannot find HeyCart project in current directory")
 }
 
 func filterAndWritePluginJson(cmd *cobra.Command, projectRoot string, shopCfg *shop.Config) error {

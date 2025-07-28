@@ -8,7 +8,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestGetShopwareProjectConstraintComposerJson(t *testing.T) {
+func TestGetHeyCartProjectConstraintComposerJson(t *testing.T) {
 	testCases := []struct {
 		Name       string
 		Files      map[string]string
@@ -20,7 +20,7 @@ func TestGetShopwareProjectConstraintComposerJson(t *testing.T) {
 			Files: map[string]string{
 				"composer.json": `{
 		"require": {
-			"shopware/core": "~6.5.0"
+			"heycart/core": "~6.5.0"
 	}}`,
 			},
 			Constraint: "~6.5.0",
@@ -30,12 +30,12 @@ func TestGetShopwareProjectConstraintComposerJson(t *testing.T) {
 			Files: map[string]string{
 				"composer.json": `{
 		"require": {
-			"shopware/core": "6.5.*"
+			"heycart/core": "6.5.*"
 	}}`,
 				"composer.lock": `{
 		"packages": [
 {
-"name": "shopware/core",
+"name": "heycart/core",
 "version": "6.5.0"
 }
 ]}`,
@@ -47,12 +47,12 @@ func TestGetShopwareProjectConstraintComposerJson(t *testing.T) {
 			Files: map[string]string{
 				"composer.json": `{
 		"require": {
-			"shopware/core": "6.5.*"
+			"heycart/core": "6.5.*"
 	}}`,
 				"composer.lock": `{
 		"packages": [
 {
-"name": "shopware/core",
+"name": "heycart/core",
 "version": "dev-trunk"
 }
 ]}`,
@@ -64,7 +64,7 @@ final public const SHOPWARE_FALLBACK_VERSION = '6.6.9999999.9999999-dev';
 			Constraint: "6.5.*",
 		},
 		{
-			Name: "Get constraint from kernel (shopware/shopware case)",
+			Name: "Get constraint from kernel (heycart/heycart case)",
 			Files: map[string]string{
 				"composer.json":          `{}`,
 				"src/Core/composer.json": `{}`,
@@ -91,11 +91,11 @@ final public const SHOPWARE_FALLBACK_VERSION = '6.6.9999999.9999999-dev';
 		},
 
 		{
-			Name: "composer.json with no shopware package",
+			Name: "composer.json with no heycart package",
 			Files: map[string]string{
 				"composer.json": `{}`,
 			},
-			Error: "missing shopware/core requirement in composer.json",
+			Error: "missing heycart/core requirement in composer.json",
 		},
 
 		{
@@ -103,18 +103,18 @@ final public const SHOPWARE_FALLBACK_VERSION = '6.6.9999999.9999999-dev';
 			Files: map[string]string{
 				"composer.json": `{
 		"require": {
-			"shopware/core": "6.5.*"
+			"heycart/core": "6.5.*"
 	}}`,
 			},
 			Constraint: "6.5.*",
 		},
 
 		{
-			Name: "composer.json malformed version, lock does not contain shopware/core",
+			Name: "composer.json malformed version, lock does not contain heycart/core",
 			Files: map[string]string{
 				"composer.json": `{
 		"require": {
-			"shopware/core": "6.5.*"
+			"heycart/core": "6.5.*"
 	}}`,
 				"composer.lock": `{"packages": []}`,
 			},
@@ -137,7 +137,7 @@ final public const SHOPWARE_FALLBACK_VERSION = '6.6.9999999.9999999-dev';
 				assert.NoError(t, os.WriteFile(tmpFile, []byte(content), 0o644))
 			}
 
-			constraint, err := GetShopwareProjectConstraint(tmpDir)
+			constraint, err := GetHeyCartProjectConstraint(tmpDir)
 
 			if tc.Constraint == "" {
 				assert.NotNil(t, err)

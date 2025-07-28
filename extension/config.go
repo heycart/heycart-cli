@@ -15,8 +15,8 @@ import (
 type ConfigBuild struct {
 	// ExtraBundles can be used to declare additional bundles to be considered for building
 	ExtraBundles []ConfigExtraBundle `yaml:"extraBundles,omitempty"`
-	// Override the shopware version constraint for building, can be used to specify the version of the shopware to use for building
-	ShopwareVersionConstraint string `yaml:"shopwareVersionConstraint,omitempty"`
+	// Override the heycart version constraint for building, can be used to specify the version of the heycart to use for building
+	HeyCartVersionConstraint string `yaml:"heycartVersionConstraint,omitempty"`
 	// Configuration for zipping
 	Zip ConfigBuildZip `yaml:"zip"`
 }
@@ -99,7 +99,7 @@ type ConfigStore struct {
 	Type *string `yaml:"type" jsonschema:"enum=extension,enum=theme"`
 	// Specifies the Path to the icon (256x256 px) for store.
 	Icon *string `yaml:"icon"`
-	// Specifies whether the extension should automatically be set compatible with Shopware bugfix versions.
+	// Specifies whether the extension should automatically be set compatible with HeyCart bugfix versions.
 	AutomaticBugfixVersionCompatibility *bool `yaml:"automatic_bugfix_version_compatibility"`
 	// Specifies the meta title of the extension in store.
 	MetaTitle ConfigTranslated[string] `yaml:"meta_title" jsonschema:"maxLength=50"`
@@ -193,14 +193,14 @@ func readExtensionConfig(dir string) (*Config, error) {
 	config := &Config{}
 	config.Build.Zip.Assets.Enabled = true
 	config.Build.Zip.Composer.Enabled = true
-	config.FileName = ".shopware-extension.yml"
+	config.FileName = ".heycart-extension.yml"
 
 	configLocation := ""
 
-	if _, err := os.Stat(filepath.Join(dir, ".shopware-extension.yml")); err == nil {
-		configLocation = filepath.Join(dir, ".shopware-extension.yml")
-	} else if _, err := os.Stat(filepath.Join(dir, ".shopware-extension.yaml")); err == nil {
-		configLocation = filepath.Join(dir, ".shopware-extension.yaml")
+	if _, err := os.Stat(filepath.Join(dir, ".heycart-extension.yml")); err == nil {
+		configLocation = filepath.Join(dir, ".heycart-extension.yml")
+	} else if _, err := os.Stat(filepath.Join(dir, ".heycart-extension.yaml")); err == nil {
+		configLocation = filepath.Join(dir, ".heycart-extension.yaml")
 	} else {
 		return config, nil
 	}

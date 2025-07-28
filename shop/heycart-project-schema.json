@@ -13,7 +13,7 @@
         },
         "url": {
           "type": "string",
-          "description": "The URL of the Shopware instance"
+          "description": "The URL of the HeyCart instance"
         },
         "build": {
           "$ref": "#/$defs/ConfigBuild"
@@ -74,7 +74,7 @@
         },
         "remove_extension_assets": {
           "type": "boolean",
-          "description": "When enabled, the assets of extensions will be removed from the extension public folder. (Requires Shopware 6.5.2.0)"
+          "description": "When enabled, the assets of extensions will be removed from the extension public folder. (Requires HeyCart 6.5.2.0)"
         },
         "keep_extension_source": {
           "type": "boolean",
@@ -115,7 +115,7 @@
         },
         "force_admin_build": {
           "type": "boolean",
-          "description": "When enabled, the shopware admin will be built"
+          "description": "When enabled, the heycart admin will be built"
         },
         "keep_node_modules": {
           "items": {

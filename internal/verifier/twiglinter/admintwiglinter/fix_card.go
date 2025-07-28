@@ -32,7 +32,7 @@ func (c CardFixer) Check(nodes []html.Node) []validation.CheckResult {
 
 func (c CardFixer) Supports(v *version.Version) bool {
 	// ...existing code...
-	return twiglinter.Shopware67Constraint.Check(v)
+	return twiglinter.HeyCart67Constraint.Check(v)
 }
 
 func (c CardFixer) Fix(nodes []html.Node) error {

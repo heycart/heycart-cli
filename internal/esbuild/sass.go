@@ -26,7 +26,7 @@ func locateDartSass(ctx context.Context) (string, error) {
 		return exePath, nil
 	}
 
-	cacheDir := path.Join(system.GetShopwareCliCacheDir(), "dart-sass", dartSassVersion)
+	cacheDir := path.Join(system.GetHeyCartCliCacheDir(), "dart-sass", dartSassVersion)
 
 	expectedPath := path.Join(cacheDir, "sass")
 

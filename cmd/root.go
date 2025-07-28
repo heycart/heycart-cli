@@ -22,7 +22,7 @@ var (
 
 var rootCmd = &cobra.Command{
 	Use:     "heycart-cli",
-	Short:   "A cli for common Shopware tasks",
+	Short:   "A cli for common HeyCart tasks",
 	Long:    `This application contains some utilities like extension management`,
 	Version: version,
 }

@@ -24,19 +24,19 @@ import (
 
 // cleanupPaths are paths that are not nesscarry for the production build.
 var cleanupPaths = []string{
-	"vendor/shopware/storefront/Resources/app/storefront/vendor/bootstrap/dist",
-	"vendor/shopware/storefront/Resources/app/storefront/test",
-	"vendor/shopware/storefront/Test",
-	"vendor/shopware/core/Framework/Test",
-	"vendor/shopware/core/Content/Test",
-	"vendor/shopware/core/Checkout/Test",
-	"vendor/shopware/core/System/Test",
+	"vendor/heycart/storefront/Resources/app/storefront/vendor/bootstrap/dist",
+	"vendor/heycart/storefront/Resources/app/storefront/test",
+	"vendor/heycart/storefront/Test",
+	"vendor/heycart/core/Framework/Test",
+	"vendor/heycart/core/Content/Test",
+	"vendor/heycart/core/Checkout/Test",
+	"vendor/heycart/core/System/Test",
 	"vendor/tecnickcom/tcpdf/examples",
 }
 
 var projectCI = &cobra.Command{
 	Use:   "ci",
-	Short: "Build Shopware in the CI",
+	Short: "Build HeyCart in the CI",
 	Args:  cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		var err error
@@ -100,7 +100,7 @@ var projectCI = &cobra.Command{
 
 		sources := extension.FindAssetSourcesOfProject(cmd.Context(), args[0], shopCfg)
 
-		shopwareConstraint, err := extension.GetShopwareProjectConstraint(args[0])
+		heycartConstraint, err := extension.GetHeyCartProjectConstraint(args[0])
 		if err != nil {
 			return err
 		}
@@ -109,8 +109,8 @@ var projectCI = &cobra.Command{
 
 		assetCfg := extension.AssetBuildConfig{
 			CleanupNodeModules:           true,
-			ShopwareRoot:                 args[0],
-			ShopwareVersion:              shopwareConstraint,
+			HeyCartRoot:                  args[0],
+			HeyCartVersion:               heycartConstraint,
 			Browserslist:                 shopCfg.Build.Browserslist,
 			SkipExtensionsWithBuildFiles: true,
 			DisableStorefrontBuild:       shopCfg.Build.DisableStorefrontBuild,
@@ -124,11 +124,11 @@ var projectCI = &cobra.Command{
 		}
 
 		optimizeSection := ci.Default.Section(cmd.Context(), "Optimizing Administration Assets")
-		if err := cleanupAdministrationFiles(cmd.Context(), path.Join(args[0], "vendor", "shopware", "administration")); err != nil {
+		if err := cleanupAdministrationFiles(cmd.Context(), path.Join(args[0], "vendor", "heycart", "administration")); err != nil {
 			return err
 		}
 
-		if err := createEmptySnippetFolder(path.Join(args[0], "vendor", "shopware", "administration")); err != nil {
+		if err := createEmptySnippetFolder(path.Join(args[0], "vendor", "heycart", "administration")); err != nil {
 			return err
 		}
 
@@ -141,7 +141,7 @@ var projectCI = &cobra.Command{
 		}
 
 		if !shopCfg.Build.KeepSourceMaps {
-			if err := cleanupJavaScriptSourceMaps(path.Join(args[0], "vendor", "shopware", "administration", "Resources", "public")); err != nil {
+			if err := cleanupJavaScriptSourceMaps(path.Join(args[0], "vendor", "heycart", "administration", "Resources", "public")); err != nil {
 				return err
 			}
 
@@ -211,15 +211,15 @@ var projectCI = &cobra.Command{
 				}
 			}
 
-			if err := os.RemoveAll(path.Join(args[0], "vendor", "shopware", "administration", "Resources", "public")); err != nil {
+			if err := os.RemoveAll(path.Join(args[0], "vendor", "heycart", "administration", "Resources", "public")); err != nil {
 				return err
 			}
 
-			if err := os.WriteFile(path.Join(args[0], "vendor", "shopware", "administration", "Resources", ".administration-js"), []byte{}, os.ModePerm); err != nil {
+			if err := os.WriteFile(path.Join(args[0], "vendor", "heycart", "administration", "Resources", ".administration-js"), []byte{}, os.ModePerm); err != nil {
 				return err
 			}
 
-			if err := os.WriteFile(path.Join(args[0], "vendor", "shopware", "administration", "Resources", ".administration-css"), []byte{}, os.ModePerm); err != nil {
+			if err := os.WriteFile(path.Join(args[0], "vendor", "heycart", "administration", "Resources", ".administration-css"), []byte{}, os.ModePerm); err != nil {
 				return err
 			}
 

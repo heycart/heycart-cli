@@ -132,15 +132,15 @@ var extensionZipCmd = &cobra.Command{
 				return fmt.Errorf("before hooks assets: %w", err)
 			}
 
-			shopwareConstraint, err := tempExt.GetShopwareVersionConstraint()
+			heycartConstraint, err := tempExt.GetHeyCartVersionConstraint()
 			if err != nil {
-				return fmt.Errorf("get shopware version constraint: %w", err)
+				return fmt.Errorf("get heycart version constraint: %w", err)
 			}
 
 			assetBuildConfig := extension.AssetBuildConfig{
 				CleanupNodeModules: true,
-				ShopwareRoot:       os.Getenv("SHOPWARE_PROJECT_ROOT"),
-				ShopwareVersion:    shopwareConstraint,
+				HeyCartRoot:        os.Getenv("SHOPWARE_PROJECT_ROOT"),
+				HeyCartVersion:     heycartConstraint,
 			}
 
 			if err := extension.BuildAssetsForExtensions(cmd.Context(), extension.ConvertExtensionsToSources(cmd.Context(), []extension.Extension{tempExt}), assetBuildConfig); err != nil {

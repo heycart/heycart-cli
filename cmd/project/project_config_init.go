@@ -42,11 +42,11 @@ var projectConfigInitCmd = &cobra.Command{
 			return err
 		}
 
-		if err := os.WriteFile(".shopware-project.yml", content, os.ModePerm); err != nil {
+		if err := os.WriteFile(".heycart-project.yml", content, os.ModePerm); err != nil {
 			return err
 		}
 
-		logging.FromContext(cmd.Context()).Info("Created .shopware-project.yml")
+		logging.FromContext(cmd.Context()).Info("Created .heycart-project.yml")
 
 		return nil
 	},

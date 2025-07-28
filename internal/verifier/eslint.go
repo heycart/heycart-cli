@@ -53,7 +53,7 @@ func (e Eslint) Check(ctx context.Context, check *Check, config ToolConfig) erro
 
 	var gr errgroup.Group
 
-	env := append(os.Environ(), fmt.Sprintf("SHOPWARE_VERSION=%s", config.MinShopwareVersion))
+	env := append(os.Environ(), fmt.Sprintf("SHOPWARE_VERSION=%s", config.MinHeyCartVersion))
 
 	for _, p := range paths {
 		p := p
@@ -111,7 +111,7 @@ func (e Eslint) Check(ctx context.Context, check *Check, config ToolConfig) erro
 func (e Eslint) Fix(ctx context.Context, config ToolConfig) error {
 	paths := append([]string{}, config.StorefrontDirectories...)
 	paths = append(paths, config.AdminDirectories...)
-	env := append(os.Environ(), fmt.Sprintf("SHOPWARE_VERSION=%s", config.MinShopwareVersion))
+	env := append(os.Environ(), fmt.Sprintf("SHOPWARE_VERSION=%s", config.MinHeyCartVersion))
 
 	var gr errgroup.Group
 

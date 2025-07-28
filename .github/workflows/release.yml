@@ -56,21 +56,21 @@ jobs:
         uses: octo-sts/action@6177b4481c00308b3839969c3eca88c96a91775f # ratchet:octo-sts/action@v1.0.0
         id: sts-homebrew
         with:
-          scope: FriendsOfShopware/homebrew-tap
+          scope: FriendsOfHeyCart/homebrew-tap
           identity: release
 
       - name: Gather Homebrew Token
         uses: octo-sts/action@6177b4481c00308b3839969c3eca88c96a91775f # ratchet:octo-sts/action@v1.0.0
-        id: sts-shopware
+        id: sts-heycart
         with:
-          scope: shopware/homebrew-tap
+          scope: heycart/homebrew-tap
           identity: swcli
 
       - name: Gather NUR Token
         uses: octo-sts/action@6177b4481c00308b3839969c3eca88c96a91775f # ratchet:octo-sts/action@v1.0.0
         id: sts-nur
         with:
-          scope: FriendsOfShopware/nur-packages
+          scope: FriendsOfHeyCart/nur-packages
           identity: release
 
       - name: Login into Docker Hub
@@ -85,7 +85,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           HOMEBREW_TAP_GITHUB_TOKEN: ${{ steps.sts-homebrew.outputs.token }}
-          HOMEBREW_TAP_GITHUB_TOKEN_SHOPWARE: ${{ steps.sts-shopware.outputs.token }}
+          HOMEBREW_TAP_GITHUB_TOKEN_SHOPWARE: ${{ steps.sts-heycart.outputs.token }}
           NUR_GITHUB_TOKEN: ${{ steps.sts-nur.outputs.token }}
           AUR_KEY: ${{ secrets.AUR_KEY }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
@@ -106,11 +106,11 @@ jobs:
           CLOUDSMITH_API_KEY: ${{ secrets.CLOUDSMITH_API_KEY }}
         run: |
           for filename in dist/*.deb; do
-              cloudsmith push deb friendsofshopware/stable/any-distro/any-version $filename
+              cloudsmith push deb friendsofheycart/stable/any-distro/any-version $filename
           done
           for filename in dist/*.rpm; do
-              cloudsmith push rpm friendsofshopware/stable/any-distro/any-version $filename
+              cloudsmith push rpm friendsofheycart/stable/any-distro/any-version $filename
           done
           for filename in dist/*.apk; do
-              cloudsmith push alpine friendsofshopware/stable/alpine/any-version $filename
+              cloudsmith push alpine friendsofheycart/stable/alpine/any-version $filename
           done

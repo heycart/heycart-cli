@@ -97,7 +97,7 @@ type Producer struct {
 	HasCancelledContract bool   `json:"hasCancelledContract"`
 	IconPath             string `json:"iconPath"`
 	IconIsSet            bool   `json:"iconIsSet"`
-	ShopwareID           string `json:"shopwareId"`
+	HeyCartID            string `json:"heycartId"`
 	UserId               int    `json:"userId"`
 	CompanyId            int    `json:"companyId"`
 	CompanyName          string `json:"companyName"`
@@ -204,7 +204,7 @@ type Extension struct {
 			ApplicationDate                   int     `json:"applicationDate"`
 			ConfirmationDate                  int     `json:"confirmationDate"`
 			SdkLicense                        bool    `json:"sdkLicense"`
-			ShopwareApproved                  bool    `json:"shopwareApproved"`
+			HeyCartApproved                   bool    `json:"heycartApproved"`
 			ProducerApproved                  bool    `json:"producerApproved"`
 			SignedDocument                    struct {
 				Id   int `json:"id"`
@@ -337,34 +337,34 @@ type Extension struct {
 	Status                              struct {
 		Name string `json:"name"`
 	} `json:"status"`
-	MinimumMarketingSoftwareVersion       interface{}   `json:"minimumMarketingSoftwareVersion"`
-	IsSubscriptionEnabled                 bool          `json:"isSubscriptionEnabled"`
-	ReleaseDate                           interface{}   `json:"releaseDate"`
-	PlannedReleaseDate                    interface{}   `json:"plannedReleaseDate"`
-	LastBusinessModelChangeDate           string        `json:"lastBusinessModelChangeDate"`
-	IsSW5Compatible                       bool          `json:"isSW5Compatible"`
-	Subprocessors                         interface{}   `json:"subprocessors"`
-	PluginTestingInstanceDisabled         bool          `json:"pluginTestingInstanceDisabled"`
-	IconURL                               string        `json:"iconUrl"`
-	Pictures                              string        `json:"pictures"`
-	HasPictures                           bool          `json:"hasPictures"`
-	Comments                              string        `json:"comments"`
-	Reviews                               string        `json:"reviews"`
-	IsPremiumPlugin                       bool          `json:"isPremiumPlugin"`
-	IsAdvancedFeature                     bool          `json:"isAdvancedFeature"`
-	IsEnterpriseAccelerator               bool          `json:"isEnterpriseAccelerator"`
-	IsSW6EnterpriseFeature                bool          `json:"isSW6EnterpriseFeature"`
-	IsSW6ProfessionalEditionFeature       bool          `json:"isSW6ProfessionalEditionFeature"`
-	Binaries                              interface{}   `json:"binaries"`
-	Predecessor                           interface{}   `json:"predecessor"`
-	Successor                             interface{}   `json:"successor"`
-	IsCompatibleWithLatestShopwareVersion bool          `json:"isCompatibleWithLatestShopwareVersion"`
-	PluginPreview                         interface{}   `json:"pluginPreview"`
-	IsNoLongerAvailableForDownload        bool          `json:"isNoLongerAvailableForDownload"`
-	AddonsLog                             []interface{} `json:"addonsLog"`
-	HasPurchasableInAppFeatures           bool          `json:"hasPurchasableInAppFeatures"`
-	ActiveShowcase                        bool          `json:"activeShowcase"`
-	CancellationOffers                    []interface{} `json:"cancellationOffers"`
+	MinimumMarketingSoftwareVersion      interface{}   `json:"minimumMarketingSoftwareVersion"`
+	IsSubscriptionEnabled                bool          `json:"isSubscriptionEnabled"`
+	ReleaseDate                          interface{}   `json:"releaseDate"`
+	PlannedReleaseDate                   interface{}   `json:"plannedReleaseDate"`
+	LastBusinessModelChangeDate          string        `json:"lastBusinessModelChangeDate"`
+	IsSW5Compatible                      bool          `json:"isSW5Compatible"`
+	Subprocessors                        interface{}   `json:"subprocessors"`
+	PluginTestingInstanceDisabled        bool          `json:"pluginTestingInstanceDisabled"`
+	IconURL                              string        `json:"iconUrl"`
+	Pictures                             string        `json:"pictures"`
+	HasPictures                          bool          `json:"hasPictures"`
+	Comments                             string        `json:"comments"`
+	Reviews                              string        `json:"reviews"`
+	IsPremiumPlugin                      bool          `json:"isPremiumPlugin"`
+	IsAdvancedFeature                    bool          `json:"isAdvancedFeature"`
+	IsEnterpriseAccelerator              bool          `json:"isEnterpriseAccelerator"`
+	IsSW6EnterpriseFeature               bool          `json:"isSW6EnterpriseFeature"`
+	IsSW6ProfessionalEditionFeature      bool          `json:"isSW6ProfessionalEditionFeature"`
+	Binaries                             interface{}   `json:"binaries"`
+	Predecessor                          interface{}   `json:"predecessor"`
+	Successor                            interface{}   `json:"successor"`
+	IsCompatibleWithLatestHeyCartVersion bool          `json:"isCompatibleWithLatestHeyCartVersion"`
+	PluginPreview                        interface{}   `json:"pluginPreview"`
+	IsNoLongerAvailableForDownload       bool          `json:"isNoLongerAvailableForDownload"`
+	AddonsLog                            []interface{} `json:"addonsLog"`
+	HasPurchasableInAppFeatures          bool          `json:"hasPurchasableInAppFeatures"`
+	ActiveShowcase                       bool          `json:"activeShowcase"`
+	CancellationOffers                   []interface{} `json:"cancellationOffers"`
 }
 
 type CreateExtensionRequest struct {
@@ -393,7 +393,7 @@ func (e ProducerEndpoint) UpdateExtension(ctx context.Context, extension *Extens
 }
 
 func (e ProducerEndpoint) GetSoftwareVersions(ctx context.Context, generation string) (*SoftwareVersionList, error) {
-	errorFormat := "shopware_versions: %v"
+	errorFormat := "heycart_versions: %v"
 	r, err := e.c.NewAuthenticatedRequest(ctx, "GET", fmt.Sprintf("%s/pluginstatics/softwareVersions?filter=[{\"property\":\"pluginGeneration\",\"value\":\"%s\"},{\"property\":\"includeNonPublic\",\"value\":\"1\"}]", ApiUrl, generation), nil)
 	if err != nil {
 		return nil, fmt.Errorf(errorFormat, err)
@@ -527,7 +527,7 @@ func (e ProducerEndpoint) GetExtensionGeneralInfo(ctx context.Context) (*Extensi
 
 	err = json.Unmarshal(body, &info)
 	if err != nil {
-		return nil, fmt.Errorf("shopware_versions: %v", err)
+		return nil, fmt.Errorf("heycart_versions: %v", err)
 	}
 
 	return info, nil

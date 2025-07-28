@@ -23,7 +23,7 @@ func (a AdminTwigLinter) Name() string {
 }
 
 func (a AdminTwigLinter) Check(ctx context.Context, check *Check, config ToolConfig) error {
-	fixers := twiglinter.GetAdministrationFixers(version.Must(version.NewVersion(config.MinShopwareVersion)))
+	fixers := twiglinter.GetAdministrationFixers(version.Must(version.NewVersion(config.MinHeyCartVersion)))
 
 	for _, p := range config.AdminDirectories {
 		err := filepath.WalkDir(p, func(path string, d fs.DirEntry, err error) error {
@@ -72,7 +72,7 @@ func (a AdminTwigLinter) Check(ctx context.Context, check *Check, config ToolCon
 }
 
 func (a AdminTwigLinter) Fix(ctx context.Context, config ToolConfig) error {
-	fixers := twiglinter.GetAdministrationFixers(version.Must(version.NewVersion(config.MinShopwareVersion)))
+	fixers := twiglinter.GetAdministrationFixers(version.Must(version.NewVersion(config.MinHeyCartVersion)))
 
 	for _, p := range config.AdminDirectories {
 		err := filepath.WalkDir(p, func(path string, d fs.DirEntry, err error) error {

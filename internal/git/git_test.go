@@ -71,16 +71,16 @@ func TestGetPublicVCSURL(t *testing.T) {
 	assert.Equal(t, "", url)
 	assert.Error(t, err)
 
-	runCommand(t, tmpDir, "remote", "add", "origin", "https://github.com/FriendsOfShopware/FroshTools.git")
+	runCommand(t, tmpDir, "remote", "add", "origin", "https://github.com/FriendsOfHeyCart/FroshTools.git")
 
 	url, err = GetPublicVCSURL(t.Context(), tmpDir)
-	assert.Equal(t, "https://github.com/FriendsOfShopware/FroshTools/commit", url)
+	assert.Equal(t, "https://github.com/FriendsOfHeyCart/FroshTools/commit", url)
 	assert.NoError(t, err)
 
-	runCommand(t, tmpDir, "remote", "set-url", "origin", "git@github.com:FriendsOfShopware/FroshTools.git")
+	runCommand(t, tmpDir, "remote", "set-url", "origin", "git@github.com:FriendsOfHeyCart/FroshTools.git")
 
 	url, err = GetPublicVCSURL(t.Context(), tmpDir)
-	assert.Equal(t, "https://github.com/FriendsOfShopware/FroshTools/commit", url)
+	assert.Equal(t, "https://github.com/FriendsOfHeyCart/FroshTools/commit", url)
 	assert.NoError(t, err)
 
 	runCommand(t, tmpDir, "remote", "set-url", "origin", "https://gitlab.com/xxx")

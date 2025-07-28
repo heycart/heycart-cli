@@ -19,10 +19,10 @@ func TestMigrateComposerJson(t *testing.T) {
 
 		// Create a test composer.json file
 		initialComposer := &packagist.ComposerJson{
-			Name: "shopware/project",
+			Name: "heycart/project",
 			Require: packagist.ComposerPackageLink{
-				"shopware/recovery": "1.0.0",
-				"php":               "^7.4",
+				"heycart/recovery": "1.0.0",
+				"php":              "^7.4",
 			},
 			RequireDev: packagist.ComposerPackageLink{
 				"some/dev-package": "^1.0",
@@ -55,13 +55,13 @@ func TestMigrateComposerJson(t *testing.T) {
 		require.NoError(t, err)
 
 		// Verify package removals
-		assert.False(t, migratedComposer.HasPackage("shopware/recovery"))
+		assert.False(t, migratedComposer.HasPackage("heycart/recovery"))
 		assert.False(t, migratedComposer.HasPackage("php"))
 
 		// Verify package additions
 		assert.Equal(t, "^2", migratedComposer.Require["symfony/flex"])
 		assert.Equal(t, "*", migratedComposer.Require["symfony/runtime"])
-		assert.Equal(t, "*", migratedComposer.RequireDev["shopware/dev-tools"])
+		assert.Equal(t, "*", migratedComposer.RequireDev["heycart/dev-tools"])
 
 		// Verify config changes
 		assert.False(t, migratedComposer.HasConfig("platform"))
@@ -84,7 +84,7 @@ func TestMigrateComposerJson(t *testing.T) {
 		assert.Equal(t, true, symfonyConfig["allow-contrib"])
 		endpoints, ok := symfonyConfig["endpoint"].([]interface{})
 		require.True(t, ok)
-		assert.Contains(t, endpoints, "https://raw.githubusercontent.com/shopware/recipes/flex/main/index.json")
+		assert.Contains(t, endpoints, "https://raw.githubusercontent.com/heycart/recipes/flex/main/index.json")
 		assert.Contains(t, endpoints, "flex://defaults")
 
 		// Verify repository configuration

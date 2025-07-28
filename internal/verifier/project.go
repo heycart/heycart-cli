@@ -47,7 +47,7 @@ func IsProject(root string) bool {
 	return composerJsonData.Type == "project"
 }
 
-func getShopwareConstraint(root string) (*version.Constraints, error) {
+func getHeyCartConstraint(root string) (*version.Constraints, error) {
 	composerJson := path.Join(root, "composer.json")
 
 	file, err := os.Open(composerJson)
@@ -63,7 +63,7 @@ func getShopwareConstraint(root string) (*version.Constraints, error) {
 
 	var composerJsonData struct {
 		Require struct {
-			Shopware string `json:"shopware/core"`
+			HeyCart string `json:"heycart/core"`
 		} `json:"require"`
 	}
 
@@ -71,11 +71,11 @@ func getShopwareConstraint(root string) (*version.Constraints, error) {
 		return nil, err
 	}
 
-	if composerJsonData.Require.Shopware == "" {
-		return nil, fmt.Errorf("shopware/core is not required")
+	if composerJsonData.Require.HeyCart == "" {
+		return nil, fmt.Errorf("heycart/core is not required")
 	}
 
-	cst, err := version.NewConstraint(composerJsonData.Require.Shopware)
+	cst, err := version.NewConstraint(composerJsonData.Require.HeyCart)
 	if err != nil {
 		return nil, err
 	}
@@ -84,7 +84,7 @@ func getShopwareConstraint(root string) (*version.Constraints, error) {
 }
 
 func GetConfigFromProject(root string) (*ToolConfig, error) {
-	constraint, err := getShopwareConstraint(root)
+	constraint, err := getHeyCartConstraint(root)
 	if err != nil {
 		return nil, err
 	}
@@ -97,7 +97,7 @@ func GetConfigFromProject(root string) (*ToolConfig, error) {
 
 	vendorPath := path.Join(root, "vendor")
 
-	shopCfg, err := shop.ReadConfig(path.Join(root, ".shopware-project.yml"), true)
+	shopCfg, err := shop.ReadConfig(path.Join(root, ".heycart-project.yml"), true)
 	if err != nil {
 		return nil, err
 	}
@@ -198,10 +198,10 @@ func GetConfigFromProject(root string) (*ToolConfig, error) {
 type rootComposerJson struct {
 	Require map[string]string `json:"require"`
 	Extra   struct {
-		Bundles map[string]rootShopwareBundle `json:"shopware-bundles"`
+		Bundles map[string]rootHeyCartBundle `json:"heycart-bundles"`
 	}
 }
 
-type rootShopwareBundle struct {
+type rootHeyCartBundle struct {
 	Name string `json:"name"`
 }

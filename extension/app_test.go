@@ -10,7 +10,7 @@ import (
 )
 
 const testAppManifest = `<?xml version="1.0" encoding="UTF-8"?>
-<manifest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/shopware/trunk/src/Core/Framework/App/Manifest/Schema/manifest-2.0.xsd">
+<manifest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/heycart/heycart/trunk/src/Core/Framework/App/Manifest/Schema/manifest-2.0.xsd">
 	<meta>
 		<name>MyExampleApp</name>
 		<label>Label</label>
@@ -25,7 +25,7 @@ const testAppManifest = `<?xml version="1.0" encoding="UTF-8"?>
 </manifest>`
 
 const testAppManifestMissingLicense = `<?xml version="1.0" encoding="UTF-8"?>
-<manifest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/shopware/trunk/src/Core/Framework/App/Manifest/Schema/manifest-2.0.xsd">
+<manifest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/heycart/heycart/trunk/src/Core/Framework/App/Manifest/Schema/manifest-2.0.xsd">
 	<meta>
 		<name>MyExampleApp</name>
 		<label>Label</label>
@@ -39,7 +39,7 @@ const testAppManifestMissingLicense = `<?xml version="1.0" encoding="UTF-8"?>
 </manifest>`
 
 const testAppManifestMissingCopyright = `<?xml version="1.0" encoding="UTF-8"?>
-<manifest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/shopware/trunk/src/Core/Framework/App/Manifest/Schema/manifest-2.0.xsd">
+<manifest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/heycart/heycart/trunk/src/Core/Framework/App/Manifest/Schema/manifest-2.0.xsd">
 	<meta>
 		<name>MyExampleApp</name>
 		<label>Label</label>
@@ -53,7 +53,7 @@ const testAppManifestMissingCopyright = `<?xml version="1.0" encoding="UTF-8"?>
 </manifest>`
 
 const testAppManifestMissingAuthor = `<?xml version="1.0" encoding="UTF-8"?>
-<manifest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/shopware/trunk/src/Core/Framework/App/Manifest/Schema/manifest-2.0.xsd">
+<manifest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/heycart/heycart/trunk/src/Core/Framework/App/Manifest/Schema/manifest-2.0.xsd">
 	<meta>
 		<name>MyExampleApp</name>
 		<label>Label</label>
@@ -67,7 +67,7 @@ const testAppManifestMissingAuthor = `<?xml version="1.0" encoding="UTF-8"?>
 </manifest>`
 
 const testAppManifestCompatibility = `<?xml version="1.0" encoding="UTF-8"?>
-<manifest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/shopware/trunk/src/Core/Framework/App/Manifest/Schema/manifest-2.0.xsd">
+<manifest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/heycart/heycart/trunk/src/Core/Framework/App/Manifest/Schema/manifest-2.0.xsd">
 	<meta>
 		<name>MyExampleApp</name>
 		<label>Label</label>
@@ -83,7 +83,7 @@ const testAppManifestCompatibility = `<?xml version="1.0" encoding="UTF-8"?>
 </manifest>`
 
 const testAppManifestIcon = `<?xml version="1.0" encoding="UTF-8"?>
-<manifest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/shopware/trunk/src/Core/Framework/App/Manifest/Schema/manifest-2.0.xsd">
+<manifest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/heycart/heycart/trunk/src/Core/Framework/App/Manifest/Schema/manifest-2.0.xsd">
 	<meta>
 		<name>MyExampleApp</name>
 		<label>Label</label>
@@ -99,7 +99,7 @@ const testAppManifestIcon = `<?xml version="1.0" encoding="UTF-8"?>
 </manifest>`
 
 const testAppManifestSetup = `<?xml version="1.0" encoding="UTF-8"?>
-<manifest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/shopware/trunk/src/Core/Framework/App/Manifest/Schema/manifest-2.0.xsd">
+<manifest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/heycart/heycart/trunk/src/Core/Framework/App/Manifest/Schema/manifest-2.0.xsd">
 	<meta>
 		<name>MyExampleApp</name>
 		<label>Label</label>
@@ -205,7 +205,7 @@ func TestAppHasSecret(t *testing.T) {
 	app.Validate(getTestContext(), check)
 
 	assert.Equal(t, 1, len(check.Results))
-	assert.Equal(t, "The xml element setup:secret is only for local development, please remove it. You can find your generated app secret on your extension detail page in the master data section. For more information see https://docs.shopware.com/en/shopware-platform-dev-en/app-system-guide/setup#authorisation", check.Results[0].Message)
+	assert.Equal(t, "The xml element setup:secret is only for local development, please remove it. You can find your generated app secret on your extension detail page in the master data section. For more information see https://docs.heycart.com/en/heycart-platform-dev-en/app-system-guide/setup#authorisation", check.Results[0].Message)
 }
 
 func TestIconExistsDefaultsPath(t *testing.T) {
@@ -257,7 +257,7 @@ func TestNoCompatibilityGiven(t *testing.T) {
 
 	assert.NoError(t, err)
 
-	compatibility, err := app.GetShopwareVersionConstraint()
+	compatibility, err := app.GetHeyCartVersionConstraint()
 	assert.NoError(t, err)
 
 	assert.Equal(t, "~6.4", compatibility.String())
@@ -272,7 +272,7 @@ func TestCompatibilityGiven(t *testing.T) {
 
 	assert.NoError(t, err)
 
-	compatibility, err := app.GetShopwareVersionConstraint()
+	compatibility, err := app.GetHeyCartVersionConstraint()
 	assert.NoError(t, err)
 
 	assert.Equal(t, "~6.5.0", compatibility.String())

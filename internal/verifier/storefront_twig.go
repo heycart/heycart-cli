@@ -23,7 +23,7 @@ func (s StorefrontTwigLinter) Name() string {
 }
 
 func (s StorefrontTwigLinter) Check(ctx context.Context, check *Check, config ToolConfig) error {
-	fixers := twiglinter.GetStorefrontFixers(version.Must(version.NewVersion(config.MinShopwareVersion)))
+	fixers := twiglinter.GetStorefrontFixers(version.Must(version.NewVersion(config.MinHeyCartVersion)))
 
 	for _, p := range config.SourceDirectories {
 		twigDir := filepath.Join(p, "Resources", "views")

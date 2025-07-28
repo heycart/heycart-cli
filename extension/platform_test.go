@@ -21,7 +21,7 @@ func getTestPlugin(tempDir string) PlatformPlugin {
 			Description: "Frosh Tools",
 			License:     "mit",
 			Version:     "1.0.0",
-			Require:     map[string]string{"shopware/core": "6.4.0.0"},
+			Require:     map[string]string{"heycart/core": "6.4.0.0"},
 			Autoload: struct {
 				Psr0 map[string]string `json:"psr-0"`
 				Psr4 map[string]string `json:"psr-4"`
@@ -30,9 +30,9 @@ func getTestPlugin(tempDir string) PlatformPlugin {
 				Name     string `json:"name"`
 				Homepage string `json:"homepage"`
 			}{{Name: "Frosh", Homepage: "https://frosh.io"}},
-			Type: "shopware-platform-plugin",
+			Type: "heycart-platform-plugin",
 			Extra: platformComposerJsonExtra{
-				ShopwarePluginClass: "FroshTools\\FroshTools",
+				HeyCartPluginClass: "FroshTools\\FroshTools",
 				Label: map[string]string{
 					"en-GB": "Frosh Tools",
 					"de-DE": "Frosh Tools",

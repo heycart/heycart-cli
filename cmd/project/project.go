@@ -10,7 +10,7 @@ var projectConfigPath string
 
 var projectRootCmd = &cobra.Command{
 	Use:   "project",
-	Short: "Manage your Shopware Project",
+	Short: "Manage your HeyCart Project",
 }
 
 func Register(rootCmd *cobra.Command) {

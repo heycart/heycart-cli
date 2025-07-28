@@ -10,7 +10,7 @@ import (
 )
 
 func TestDetectNothingFound(t *testing.T) {
-	_, err := IsShopwareVersion(t.TempDir(), "6.4")
+	_, err := IsHeyCartVersion(t.TempDir(), "6.4")
 
 	assert.ErrorIs(t, err, ErrNoComposerFileFound)
 }
@@ -21,14 +21,14 @@ func TestDetectPlatformTrunk(t *testing.T) {
 	composerJson := filepath.Join(tmpDir, "composer.json")
 
 	jsonStruct := composerJsonStruct{
-		Name: "shopware/platform",
+		Name: "heycart/platform",
 	}
 
 	bytes, _ := json.Marshal(jsonStruct)
 
 	_ = os.WriteFile(composerJson, bytes, os.ModePerm)
 
-	val, err := IsShopwareVersion(tmpDir, ">=6.3")
+	val, err := IsHeyCartVersion(tmpDir, ">=6.3")
 
 	assert.NoError(t, err)
 	assert.True(t, val)
@@ -47,9 +47,9 @@ func TestDetectComposerJsonNotPlatform(t *testing.T) {
 
 	_ = os.WriteFile(composerJson, bytes, os.ModePerm)
 
-	val, err := IsShopwareVersion(tmpDir, ">=6.3")
+	val, err := IsHeyCartVersion(tmpDir, ">=6.3")
 
-	assert.ErrorIs(t, err, ErrShopwareDependencyNotFound)
+	assert.ErrorIs(t, err, ErrHeyCartDependencyNotFound)
 	assert.False(t, val)
 }
 
@@ -64,7 +64,7 @@ func TestComposerLockMatching(t *testing.T) {
 			Version string `json:"version"`
 		}{
 			{
-				Name:    "shopware/core",
+				Name:    "heycart/core",
 				Version: "6.4.0",
 			},
 		},
@@ -74,7 +74,7 @@ func TestComposerLockMatching(t *testing.T) {
 
 	_ = os.WriteFile(composerLock, bytes, os.ModePerm)
 
-	val, err := IsShopwareVersion(tmpDir, ">=6.3")
+	val, err := IsHeyCartVersion(tmpDir, ">=6.3")
 
 	assert.NoError(t, err)
 	assert.True(t, val)
@@ -91,7 +91,7 @@ func TestComposerLockNotMatching(t *testing.T) {
 			Version string `json:"version"`
 		}{
 			{
-				Name:    "shopware/core",
+				Name:    "heycart/core",
 				Version: "6.4.0",
 			},
 		},
@@ -101,7 +101,7 @@ func TestComposerLockNotMatching(t *testing.T) {
 
 	_ = os.WriteFile(composerLock, bytes, os.ModePerm)
 
-	val, err := IsShopwareVersion(tmpDir, "<=6.3")
+	val, err := IsHeyCartVersion(tmpDir, "<=6.3")
 
 	assert.NoError(t, err)
 	assert.False(t, val)
@@ -123,7 +123,7 @@ func TestComposerLockNoDependency(t *testing.T) {
 
 	_ = os.WriteFile(composerLock, bytes, os.ModePerm)
 
-	val, err := IsShopwareVersion(tmpDir, "<=6.3")
+	val, err := IsHeyCartVersion(tmpDir, "<=6.3")
 
 	assert.ErrorIs(t, err, ErrNoComposerFileFound)
 	assert.False(t, val)

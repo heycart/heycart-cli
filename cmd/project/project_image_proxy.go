@@ -58,10 +58,10 @@ func (r *responseCapture) Header() http.Header {
 var projectImageProxyCmd = &cobra.Command{
 	Use:   "image-proxy",
 	Short: "Start a proxy server for serving images from the public folder",
-	Long: `Start an HTTP server that serves files from the public folder of the closest Shopware project.
+	Long: `Start an HTTP server that serves files from the public folder of the closest HeyCart project.
 If a file is not found locally, it proxies the request to the upstream server.`,
 	RunE: func(cmd *cobra.Command, args []string) error {
-		path, err := findClosestShopwareProject()
+		path, err := findClosestHeyCartProject()
 		if err != nil {
 			return err
 		}
@@ -78,7 +78,7 @@ If a file is not found locally, it proxies the request to the upstream server.`,
 		}
 
 		if upstreamURL == "" {
-			return fmt.Errorf("upstream URL must be provided either via --url flag or in .shopware-project.yml")
+			return fmt.Errorf("upstream URL must be provided either via --url flag or in .heycart-project.yml")
 		}
 
 		// Parse upstream URL
@@ -203,7 +203,7 @@ If a file is not found locally, it proxies the request to the upstream server.`,
 		// Setup config file management if not skipped
 		var cleanup func()
 		if !imageProxySkipConfig {
-			// Create Shopware config file
+			// Create HeyCart config file
 			configDir := filepath.Join(path, "config", "packages")
 			configFile := filepath.Join(configDir, "zzz-sw-cli-image-proxy.yml")
 
@@ -212,14 +212,14 @@ If a file is not found locally, it proxies the request to the upstream server.`,
 				return fmt.Errorf("failed to create config directory: %w", err)
 			}
 
-			// Determine the URL to use in Shopware config
+			// Determine the URL to use in HeyCart config
 			configURL := fmt.Sprintf("http://localhost:%s", imageProxyPort)
 			if imageProxyExternalURL != "" {
 				configURL = strings.TrimSuffix(imageProxyExternalURL, "/")
 			}
 
-			// Write Shopware configuration
-			configContent := fmt.Sprintf(`shopware:
+			// Write HeyCart configuration
+			configContent := fmt.Sprintf(`heycart:
   filesystem:
     public:
       type: "local"
@@ -229,17 +229,17 @@ If a file is not found locally, it proxies the request to the upstream server.`,
 `, configURL)
 
 			if err := os.WriteFile(configFile, []byte(configContent), 0644); err != nil {
-				return fmt.Errorf("failed to write Shopware config: %w", err)
+				return fmt.Errorf("failed to write HeyCart config: %w", err)
 			}
 
-			logging.FromContext(cmd.Context()).Infof("Created Shopware config: %s (URL: %s)", configFile, configURL)
+			logging.FromContext(cmd.Context()).Infof("Created HeyCart config: %s (URL: %s)", configFile, configURL)
 
 			// Setup cleanup handler
 			cleanup = func() {
 				if err := os.Remove(configFile); err != nil && !os.IsNotExist(err) {
 					logging.FromContext(cmd.Context()).Errorf("Failed to remove config file: %v", err)
 				} else {
-					logging.FromContext(cmd.Context()).Infof("Removed Shopware config: %s", configFile)
+					logging.FromContext(cmd.Context()).Infof("Removed HeyCart config: %s", configFile)
 				}
 			}
 
@@ -258,7 +258,7 @@ If a file is not found locally, it proxies the request to the upstream server.`,
 			// Ensure cleanup on normal exit
 			defer cleanup()
 		} else {
-			logging.FromContext(cmd.Context()).Infof("Skipping Shopware config file creation")
+			logging.FromContext(cmd.Context()).Infof("Skipping HeyCart config file creation")
 		}
 
 		// Start server
@@ -301,6 +301,6 @@ func init() {
 	projectImageProxyCmd.Flags().StringVar(&imageProxyPort, "port", "8080", "Port to listen on")
 	projectImageProxyCmd.Flags().StringVar(&imageProxyURL, "url", "", "Upstream server URL (overrides config)")
 	projectImageProxyCmd.Flags().BoolVar(&imageProxyClear, "clear", false, "Clear cache before starting")
-	projectImageProxyCmd.Flags().StringVar(&imageProxyExternalURL, "external-url", "", "External URL for Shopware config (e.g., for reverse proxy setups)")
-	projectImageProxyCmd.Flags().BoolVar(&imageProxySkipConfig, "skip-config", false, "Skip creating Shopware config file")
+	projectImageProxyCmd.Flags().StringVar(&imageProxyExternalURL, "external-url", "", "External URL for HeyCart config (e.g., for reverse proxy setups)")
+	projectImageProxyCmd.Flags().BoolVar(&imageProxySkipConfig, "skip-config", false, "Skip creating HeyCart config file")
 }

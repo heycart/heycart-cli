@@ -96,7 +96,7 @@ type MerchantShop struct {
 	Instance                     bool        `json:"instance"`
 	Mandant                      bool        `json:"mandant"`
 	PlatformMigrationInformation interface{} `json:"platformMigrationInformation"`
-	ShopwareVersion              struct {
+	HeyCartVersion               struct {
 		Id          int    `json:"id"`
 		Name        string `json:"name"`
 		Parent      int    `json:"parent"`
@@ -104,8 +104,8 @@ type MerchantShop struct {
 		Major       string `json:"major"`
 		ReleaseDate string `json:"releaseDate"`
 		Public      bool   `json:"public"`
-	} `json:"shopwareVersion"`
-	ShopwareEdition                string `json:"shopwareEdition"`
+	} `json:"heycartVersion"`
+	HeyCartEdition                 string `json:"heycartEdition"`
 	DomainIdn                      string `json:"domain_idn"`
 	LatestVerificationStatusChange struct {
 		Id                   int    `json:"id"`
