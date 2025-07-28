@@ -21,7 +21,7 @@ func getTestPlugin(tempDir string) PlatformPlugin {
 			Description: "Frosh Tools",
 			License:     "mit",
 			Version:     "1.0.0",
-			Require:     map[string]string{"heycart/core": "6.4.0.0"},
+			Require:     map[string]string{"heycart/core": "6.7.2.1"},
 			Autoload: struct {
 				Psr0 map[string]string `json:"psr-0"`
 				Psr4 map[string]string `json:"psr-4"`
