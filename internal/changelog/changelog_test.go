@@ -38,13 +38,13 @@ func TestTicketParsing(t *testing.T) {
 		Variables: map[string]string{
 			"ticket": "^(NEXT-[0-9]+)",
 		},
-		Template: "{{range .Commits}}- [{{ .Message }}](https://issues.heycart.com/issues/{{ .Variables.ticket }}){{end}}",
+		Template: "{{range .Commits}}- [{{ .Message }}](https://issues.heycart.net/issues/{{ .Variables.ticket }}){{end}}",
 	}
 
 	changelog, err := renderChangelog(commits, cfg)
 
 	assert.NoError(t, err)
-	assert.Equal(t, "- [NEXT-1234 - Fooo](https://issues.heycart.com/issues/NEXT-1234)", changelog)
+	assert.Equal(t, "- [NEXT-1234 - Fooo](https://issues.heycart.net/issues/NEXT-1234)", changelog)
 }
 
 func TestIncludeFilters(t *testing.T) {

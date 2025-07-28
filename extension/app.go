@@ -212,7 +212,7 @@ func (a App) Validate(_ context.Context, check validation.Check) {
 		check.AddResult(validation.CheckResult{
 			Path:       "manifest.xml",
 			Identifier: "metadata.setup",
-			Message:    "The xml element setup:secret is only for local development, please remove it. You can find your generated app secret on your extension detail page in the master data section. For more information see https://docs.heycart.com/en/heycart-platform-dev-en/app-system-guide/setup#authorisation",
+			Message:    "The xml element setup:secret is only for local development, please remove it. You can find your generated app secret on your extension detail page in the master data section. For more information see https://docs.heycart.net/en/heycart-platform-dev-en/app-system-guide/setup#authorisation",
 			Severity:   validation.SeverityError,
 		})
 	}

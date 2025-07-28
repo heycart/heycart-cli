@@ -11,7 +11,7 @@ import (
 	"github.com/heycart/heycart-cli/logging"
 )
 
-const ApiUrl = "https://api.heycart.com"
+const ApiUrl = "https://api.heycart.net"
 
 type AccountConfig interface {
 	GetAccountEmail() string

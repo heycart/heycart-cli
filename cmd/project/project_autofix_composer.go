@@ -90,7 +90,7 @@ var projectAutofixComposerCmd = &cobra.Command{
 				continue
 			}
 
-			composerInstall = append(composerInstall, fmt.Sprintf("store.heycart.com/%s:%s", strings.ToLower(extName), extVersion.String()))
+			composerInstall = append(composerInstall, fmt.Sprintf("store.heycart.net/%s:%s", strings.ToLower(extName), extVersion.String()))
 			deleteDirectories = append(deleteDirectories, extension.GetPath())
 		}
 
@@ -111,10 +111,10 @@ var projectAutofixComposerCmd = &cobra.Command{
 		fmt.Print(greenStyle.Render("bin/console plugin:refresh"))
 		fmt.Println(" after deleting the directories.")
 
-		if !rootComposerJson.Repositories.HasRepository("https://packages.heycart.com") {
+		if !rootComposerJson.Repositories.HasRepository("https://packages.heycart.net") {
 			rootComposerJson.Repositories = append(rootComposerJson.Repositories, packagist.ComposerJsonRepository{
 				Type: "composer",
-				URL:  "https://packages.heycart.com",
+				URL:  "https://packages.heycart.net",
 			})
 		}
 
@@ -123,7 +123,7 @@ var projectAutofixComposerCmd = &cobra.Command{
 			return err
 		}
 
-		auth.BearerAuth["packages.heycart.com"] = token
+		auth.BearerAuth["packages.heycart.net"] = token
 
 		if err := auth.Save(); err != nil {
 			return err

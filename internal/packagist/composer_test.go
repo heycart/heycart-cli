@@ -75,7 +75,7 @@ func TestComposerJsonSave(t *testing.T) {
 		Authors: []ComposerJsonAuthor{
 			{
 				Name:  "HeyCart AG",
-				Email: "info@heycart.com",
+				Email: "info@heycart.net",
 			},
 		},
 		Require: ComposerPackageLink{

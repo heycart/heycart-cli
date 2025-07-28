@@ -210,7 +210,7 @@ func init() {
 }
 
 func fetchAvailableHeyCartVersions(ctx context.Context) ([]string, error) {
-	r, err := http.NewRequestWithContext(ctx, http.MethodGet, "https://releases.heycart.com/changelog/index.json", http.NoBody)
+	r, err := http.NewRequestWithContext(ctx, http.MethodGet, "https://heycart-static-data.oss-cn-beijing.aliyuncs.com/releases.json", http.NoBody)
 	if err != nil {
 		return nil, err
 	}

@@ -44,7 +44,7 @@ func TestFillAuthStruct(t *testing.T) {
 		auth := &ComposerAuth{}
 		filledAuth := fillAuthStruct(auth)
 
-		assert.Equal(t, "my-token", filledAuth.BearerAuth["packages.heycart.com"])
+		assert.Equal(t, "my-token", filledAuth.BearerAuth["packages.heycart.net"])
 	})
 
 	t.Run("with COMPOSER_AUTH", func(t *testing.T) {
@@ -81,14 +81,14 @@ func TestFillAuthStruct(t *testing.T) {
 		t.Setenv("SHOPWARE_PACKAGES_TOKEN", "my-token")
 		composerAuth := `{
 			"bearer": {
-				"packages.heycart.com": "composer-token"
+				"packages.heycart.net": "composer-token"
 			}
 		}`
 		t.Setenv("COMPOSER_AUTH", composerAuth)
 		auth := &ComposerAuth{}
 		filledAuth := fillAuthStruct(auth)
 
-		assert.Equal(t, "my-token", filledAuth.BearerAuth["packages.heycart.com"])
+		assert.Equal(t, "my-token", filledAuth.BearerAuth["packages.heycart.net"])
 	})
 }
 

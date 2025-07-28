@@ -205,7 +205,7 @@ func TestAppHasSecret(t *testing.T) {
 	app.Validate(getTestContext(), check)
 
 	assert.Equal(t, 1, len(check.Results))
-	assert.Equal(t, "The xml element setup:secret is only for local development, please remove it. You can find your generated app secret on your extension detail page in the master data section. For more information see https://docs.heycart.com/en/heycart-platform-dev-en/app-system-guide/setup#authorisation", check.Results[0].Message)
+	assert.Equal(t, "The xml element setup:secret is only for local development, please remove it. You can find your generated app secret on your extension detail page in the master data section. For more information see https://docs.heycart.net/en/heycart-platform-dev-en/app-system-guide/setup#authorisation", check.Results[0].Message)
 }
 
 func TestIconExistsDefaultsPath(t *testing.T) {
