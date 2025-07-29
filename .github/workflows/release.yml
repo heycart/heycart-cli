@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Harden Runner
-        uses: step-security/harden-runner@0634a2670c59f64b4a01f0f96f84700a4088b9f0 # ratchet:step-security/harden-runner@v2.12.0
+        uses: step-security/harden-runner@ec9f2d5744a09debf3a187a3f4f675c53b671911 # ratchet:step-security/harden-runner@v2.13.0
         with:
           egress-policy: audit
 
@@ -35,7 +35,7 @@ jobs:
           check-latest: true
 
       - name: Install Syft
-        uses: anchore/sbom-action/download-syft@e11c554f704a0b820cbf8c51673f6945e0731532 # ratchet:anchore/sbom-action/download-syft@v0.20.0
+        uses: anchore/sbom-action/download-syft@7b36ad622f042cab6f59a75c2ac24ccb256e9b45 # ratchet:anchore/sbom-action/download-syft@v0.20.4
 
       - name: Setup Node
         uses: actions/setup-node@v4
